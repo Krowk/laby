@@ -1,7 +1,7 @@
 /**
  * an Entity is anything that has a position
  */
-public class Entity {
+public abstract class Entity {
 	// Fields
 	private int posX;
 	private int posY;
@@ -18,6 +18,12 @@ public class Entity {
 	}
 	
 	// dynamic methods
+	
+	public void show(){
+		System.out.println(posX);
+		System.out.println(posY);
+	}
+	
 	
 	// static methods
 	

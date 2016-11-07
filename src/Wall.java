@@ -3,10 +3,9 @@ import java.util.ArrayList;
  * 
  *
  */
-public class Wall extends Entity{
+public class Wall extends Bloc{
 	// Fields
 	private int id;
-	private int length;
 	private int angle; //°
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	
@@ -18,10 +17,9 @@ public class Wall extends Entity{
 	 * @param length the length of the wall: int
 	 * @param angle the inclination on the wall in °: int
 	 */
-	public Wall(int posX, int posY, int length, int angle){
-		super(posX, posY);
+	public Wall(int posX, int posY, int length, int width, int angle){
+		super(posX, posY, length, width);
 		this.id	= walls.size();
-		this.length	= length;
 		this.angle	= angle;
 		walls.add(this);
 	}
