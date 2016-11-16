@@ -1,6 +1,10 @@
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import entities.Entity;
+import entities.Wall;
+
 import java.io.BufferedReader;
 public class Maze {
 	private int length;
@@ -23,6 +27,7 @@ public class Maze {
 	public void showAll(){
 		for (int i = 0; i < maze.size(); i++) {
 			maze.get(i).show();
+			System.out.println("");
 		}
 	}
 	

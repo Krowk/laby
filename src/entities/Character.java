@@ -1,3 +1,4 @@
+package entities;
 import java.util.ArrayList;
 /**
  * A Character is a Bloc with a life
@@ -18,12 +19,16 @@ public class Character extends Bloc{
 	 * @param life : the life of the character : int
 	 */
 	public Character(int posX, int posY, int length, int width, int life) {
-		super(posX, posY, length, width);
+		super(posX, posY, length, width, 0);
 		this.id = characters.size();
 		this.life = life;
 		characters.add(this);
 	}
 	// Dynamic methods
+
+	// 3- methode qui fait perde n point de vie au personnage
+	// 4- methode qui fait gagner n point de vie au personnage
+	
 	public void info(){
 		System.out.println("life: "+this.life);
 	}

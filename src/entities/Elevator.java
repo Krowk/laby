@@ -1,3 +1,4 @@
+package entities;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,7 @@ public class Elevator extends Bloc {
 	 * @param floor
 	 */
 	public Elevator(int x, int y, int length, int width, int floor) {
-		super(x, y, length, width);
+		super(x, y, length, width, 0);
 		this.id	= elevators.size();
 		this.floor	= floor;
 		elevators.add(this);

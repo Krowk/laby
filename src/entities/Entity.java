@@ -1,10 +1,11 @@
+package entities;
 /**
  * an Entity is anything that has a position
  */
 public abstract class Entity {
 	// Fields
-	private int posX;
-	private int posY;
+	protected int posX;
+	protected int posY;
 	
 	// Constructors
 	/**
@@ -20,8 +21,8 @@ public abstract class Entity {
 	// dynamic methods
 	
 	public void show(){
-		System.out.println(posX);
-		System.out.println(posY);
+		System.out.println("posX:\t"+ posX);
+		System.out.println("posY:\t"+ posY);
 	}
 	
 	
@@ -29,6 +30,7 @@ public abstract class Entity {
 	
 	// getters
 	public int getPosX(){ return this.posX;}
+
 	public int getPosY(){ return this.posY;}
 	
 	// setters

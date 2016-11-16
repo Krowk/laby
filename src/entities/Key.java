@@ -1,3 +1,4 @@
+package entities;
 
 public class Key {
 	private int id;

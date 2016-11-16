@@ -1,3 +1,4 @@
+package entities;
 
 public class Stair extends Elevator{
 	private boolean up;
