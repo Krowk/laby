@@ -1,14 +1,36 @@
 package entities;
 
-public class Key extends Entity {
-	private int id;
+/**
+ * key is a Entity with a id (to open doors)
+ * can be on the floor or in the inventory
+ * 
+ *
+ */
+public class Key extends LootTable {
+	
+//Fields -----------------------------------------------------
+	
 	private boolean onFloor = true;
 	
 	
+// Constructor------------------------------------------------
 	
+	/**
+	 * Create a key
+	 * @param id 
+	 * 			: a id is the number of the key (int)
+	 * 
+	 * @param onFloor
+	 * 			: on the floor (boolean)
+	 * 
+	 * @param posX
+	 * 			: x position (int)
+	 * 
+	 * @param posY
+	 * 			: y position (int)
+	 */
 	public Key(int id, boolean onFloor,int posX, int posY) {
-		super(posX,posY);
-		this.id = id;
+		super(posX,posY,id);
 		this.onFloor = onFloor;
 	}
 	

@@ -1,13 +1,16 @@
 package entities;
 /**
- * an Entity is anything that has a position
+ * An Entity is anything that has a position
  */
 public abstract class Entity {
-	// Fields
+	
+// Fields -----------------------------------------------------
+	
 	protected int posX;
 	protected int posY;
 	
-	// Constructors
+// Constructors -----------------------------------------------
+	
 	/**
 	 * create a Entity
 	 * @param posX : a x position: int
@@ -18,21 +21,33 @@ public abstract class Entity {
 		this.posY = posY;
 	}
 	
-	// dynamic methods
+// dynamic methods --------------------------------------------
 	
+	/**
+	 * Show the position of the Entity
+	 */
 	public void show(){
 		System.out.println("posX:\t"+ posX);
 		System.out.println("posY:\t"+ posY);
 	}
 	
 	
-	// static methods
+// static methods ---------------------------------------------
 	
-	// getters
+// getters ----------------------------------------------------
+	
+	/**
+	 * Getting the position X of the Entity
+	 * @return
+	 */
 	public int getPosX(){ return this.posX;}
 
+	/**
+	 * Getting the position Y of the Entity
+	 * @return
+	 */
 	public int getPosY(){ return this.posY;}
 	
-	// setters
+// setters ----------------------------------------------------
 
 }

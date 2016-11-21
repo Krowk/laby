@@ -6,6 +6,7 @@ import entities.Entity;
 import entities.Wall;
 
 import java.io.BufferedReader;
+
 public class Maze {
 	private int length;
 	private int width;
