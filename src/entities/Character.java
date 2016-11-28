@@ -3,17 +3,33 @@ package entities;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 /**
  * A Character is a Bloc with a life
  */
 public class Character extends Bloc {
+	
+	public static void main (String[] args){
+		Character c = new Character(0,0,10,10,100,50,3);
+		c.affiche();
+		Food f = new Food(1,false,0,0,0,0,"Bouf1");
+		Food f1 = new Food(1,false,0,0,0,0,"Bouf2");
+		Food f2 = new Food(1,false,0,0,0,0,"Bouf3");
+		Food f3 = new Food(1,false,0,0,0,0,"Bouf4");
+		c.putInInventory(f);
+		c.putInInventory(f1);
+		c.putInInventory(f2);
+		c.putInInventory(f3);
+		c.affiche();
+		
+	}
 
 // Fields------------------------------------------------------------------------
 	
 	private int id;
 	private int life;
 	private int force;
-	private LootTable tabItems[];
+	private Lootable tabItems[];
 	private int itemsMax;
 	public static int numId = 0;
 	public static HashMap<Integer,Character> characters = new HashMap<Integer,Character>();
@@ -39,7 +55,7 @@ public class Character extends Bloc {
 		this.id = numId;
 		this.life = life;
 		this.force = force;
-		this.tabItems = new LootTable[itemsMax];
+		this.tabItems = new Lootable[itemsMax];
 		characters.put(id,this);
 		numId+=1;
 	}
@@ -74,7 +90,7 @@ public class Character extends Bloc {
 	
 	/**
 	 * Losing life
-	 * @param x : is the force losed (int)
+	 * @param x : x is the force losed (int)
 	 */
 	public void loseForce(int x) {
 		this.force = this.force - x;
@@ -94,7 +110,8 @@ public class Character extends Bloc {
 	
 	/**
 	 * Gain of life and force for a character
-	 * @param f1: is the food (Food)
+	 * @param f1
+	 * 			: f1 is the food (Food)
 	 */
 	public void eat(Food f1){
 		this.life = this.life + f1.getLifeGain();
@@ -103,12 +120,51 @@ public class Character extends Bloc {
 	
 	public void info() {
 		System.out.println("life: " + this.life);
+		System.out.println("force" + this.force);
+	}
+	
+	/**
+	 * Put a element lootable in the inventory
+	 * 
+	 * @param x 
+	 * 			: x is the element lootable
+	 */
+	public void putInInventory(Lootable x){
+		int i = 0;
+		int item = 1;
+		
+		while( i < tabItems.length && item > 0){
+			
+			if(tabItems[i] == null){
+				tabItems[i]=x;
+				item = item-1;
+			}
+			
+			i++;
+		}
+	}
+	
+	public void affiche(){
+		for (int i = 0; i < tabItems.length; i++) {
+			if(tabItems[i]==null){
+				System.out.println("Element "+i+" : est vide");
+			}
+			else{
+			System.out.println("Element "+i+" : "+ tabItems[i].getName());
+			}
+		}
+	}
+	
+	public void deletItem(Lootable x){
+		for (int i = 0; i < tabItems.length; i++) {
+			if(x.getId() == tabItems[i].getId()){
+				tabItems[i]=null;
+			}
+		}
+		
+		
 	}
 
-	public void putInInventory(LootTable x){
-		
-		// a faire
-	}
 	
 // Static methods --------------------------------------------------------------
 	

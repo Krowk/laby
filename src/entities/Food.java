@@ -5,7 +5,7 @@ package entities;
  * 
  *
  */
-public class Food extends LootTable {
+public class Food extends Lootable {
 
 //Fields -----------------------------------------------------------------------
 	
@@ -36,8 +36,8 @@ public class Food extends LootTable {
 	 * @param id
 	 * 			: id of the food (int)
 	 */
-	public Food(int lifeGain, boolean onFloor, int forceGain,int posX, int posY, int id) {
-		super(posX,posY,id);
+	public Food(int lifeGain, boolean onFloor, int forceGain,int posX, int posY, int id,String name) {
+		super(posX,posY,id,name);
 		this.lifeGain = lifeGain;
 		this.onFloor = onFloor;
 		this.forceGain = forceGain;
@@ -63,7 +63,9 @@ public class Food extends LootTable {
 	}
 
 
-	
+	public void use(){
+		
+	}
 	
 	
 	

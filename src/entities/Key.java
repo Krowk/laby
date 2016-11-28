@@ -6,7 +6,7 @@ package entities;
  * 
  *
  */
-public class Key extends LootTable {
+public class Key extends Lootable {
 	
 //Fields -----------------------------------------------------
 	
@@ -29,9 +29,15 @@ public class Key extends LootTable {
 	 * @param posY
 	 * 			: y position (int)
 	 */
-	public Key(int id, boolean onFloor,int posX, int posY) {
-		super(posX,posY,id);
+	public Key(int id, boolean onFloor,int posX, int posY,String name) {
+		super(posX,posY,id,name);
 		this.onFloor = onFloor;
+	}
+
+
+	public void use() {
+		
+		
 	}
 	
 	
