@@ -1,5 +1,6 @@
 package physics;
 
+import java.sql.Time;
 import entities.Bloc;
 import entities.Entity;
 import entities.Line;
@@ -156,9 +157,9 @@ public class Collision {
 			y = true;
 		}
 		
-		System.out.println(x);
-		System.out.println(y);
-		System.out.println(x && y);
+		//System.out.println(x);
+		//System.out.println(y);
+		//System.out.println(x && y);
 		
 	}
 

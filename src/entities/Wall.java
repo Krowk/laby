@@ -50,6 +50,7 @@ public class Wall extends Bloc{
 		super.show();
 		
 	}
+
 	
 	// Static methods
 	/**
