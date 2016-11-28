@@ -19,13 +19,10 @@ public class AwtManager {
 		frame.setVisible(true);
 	}
 	
-	public void showImage(){
-		panel.add(new ImageComponent("src/blup.png"));
+	public void showImage(String File){
+		panel.add(new ImageComponent(File));
 		frame.setVisible(true);
 	}
 	
-	public static void main(String[] agrs){
-		AwtManager awtManager = new AwtManager();
-		awtManager.showImage();
-	}
+	
 }
