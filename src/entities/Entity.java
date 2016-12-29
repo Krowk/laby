@@ -1,16 +1,22 @@
 package entities;
+
+
 /**
  * An Entity is anything that has a position
  */
 public abstract class Entity {
 	
 // Fields -----------------------------------------------------
-	
+	/**
+	 * The x coordinate of the Entity
+	 */
 	protected int posX;
+	/**
+	 * The y coordinate of the Entity
+	 */
 	protected int posY;
 	
 // Constructors -----------------------------------------------
-	
 	/**
 	 * create a Entity
 	 * @param posX : a x position: int
@@ -22,7 +28,6 @@ public abstract class Entity {
 	}
 	
 // dynamic methods --------------------------------------------
-	
 	/**
 	 * Show the position of the Entity
 	 */
@@ -31,23 +36,36 @@ public abstract class Entity {
 		System.out.println("posY:\t"+ posY);
 	}
 	
+	/**
+	 * change the x coordinate of the Entity
+	 * @param deplacement
+	 */
+	public void moveX(int deplacement){
+		this.posX += deplacement;
+	}
+	
+	/**
+	 * change the y coordinate of the Entity
+	 * @param deplacement 
+	 */
+	public void moveY(int deplacement){
+		this.posY += deplacement;
+	}
 	
 // static methods ---------------------------------------------
 	
 // getters ----------------------------------------------------
-	
 	/**
-	 * Getting the position X of the Entity
+	 * Get the x coordinate of the Entity
 	 * @return
 	 */
 	public int getPosX(){ return this.posX;}
 
 	/**
-	 * Getting the position Y of the Entity
+	 * Get the y coordinate of the Entity
 	 * @return
 	 */
 	public int getPosY(){ return this.posY;}
 	
 // setters ----------------------------------------------------
-
 }

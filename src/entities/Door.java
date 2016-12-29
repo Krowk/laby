@@ -33,7 +33,6 @@ public class Door {
 		doors.add(this);
 	}
 	
-	//Jaime la voiture	!
 	
 	// dynamic methods
 	

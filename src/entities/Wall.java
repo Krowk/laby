@@ -8,11 +8,17 @@ import physics.Angle;
  *
  */
 public class Wall extends Bloc{
-	// Fields
+// Fields -----------------------------------------------------
+	/**
+	 * The identificator of the wall
+	 */
 	private int id; //°
+	/**
+	 * The list of all the wall
+	 */
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	
-	// Constructors
+// Constructors -----------------------------------------------
 	/**
 	 * create a Wall
 	 * @param posX the x position: int 
@@ -45,14 +51,17 @@ public class Wall extends Bloc{
 		walls.add(this);
 	}
 	
-	// Dynamic methods
+// Dynamic methods --------------------------------------------
+	/**
+	 * print in console the fields of the wall
+	 */
 	public void show(){
 		super.show();
 		
 	}
 
 	
-	// Static methods
+// Static methods ---------------------------------------------
 	/**
 	 * get a wall from its id
 	 * @param id :the id of the wall
@@ -62,8 +71,12 @@ public class Wall extends Bloc{
 		return walls.get(id);
 	}
 	
-	// getters
+// getters ----------------------------------------------------
+	/**
+	 * get the id of the wall
+	 * @return the id of this wall
+	 */
 	public int getId(){ return this.id;}
 	
-	// setters
+// setters ----------------------------------------------------
 }

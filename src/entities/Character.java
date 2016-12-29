@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -30,7 +29,7 @@ public class Character extends Bloc {
 	private int life;
 	private int force;
 	private Lootable tabItems[];
-	private int itemsMax;
+	//private int itemsMax;
 	public static int numId = 0;
 	public static HashMap<Integer,Character> characters = new HashMap<Integer,Character>();
 
@@ -225,6 +224,8 @@ public class Character extends Bloc {
 	public int getLife() {
 		return this.life;
 	}
+	
+	
 
 // setters ---------------------------------------------------------------------
 

@@ -1,12 +1,14 @@
 package physics;
 
-import java.sql.Time;
 import entities.Bloc;
 import entities.Entity;
 import entities.Line;
 
 public class Collision {
-
+// Fields -----------------------------------------------------
+	public static final double EPSILON = 0.0001;
+	
+// Static methods ---------------------------------------------
 	/**
 	 * Check if two Entities are colliding
 	 * 
@@ -16,11 +18,17 @@ public class Collision {
 	 *            an Entity
 	 * @return true if colliding, else false
 	 */
-	public static boolean EntityEntity(Entity a, Entity b) {
+	public static boolean entityEntity(Entity a, Entity b) {
 		return (a.getPosX() == b.getPosX() && a.getPosY() == b.getPosY());
 	}
 
-	public static boolean LineEntity(Line a, Entity b) {
+	/**
+	 * Check if a Line and an Entity are colliding
+	 * @param a the line
+	 * @param b the entity
+	 * @return true if they collide
+	 */
+	public static boolean lineEntity(Line a, Entity b) {
 		int angle = a.getAngle().getDegree();
 		int x, y;
 		boolean exept1 = false, exept2 = false;
@@ -28,14 +36,14 @@ public class Collision {
 			x = b.getPosX();
 			exept1 = true;
 		} else {
-			x = (int) ((b.getPosX() - a.getPosX()) / Math.cos(a.getAngle().getRadian()));
+			x =(int)((b.getPosX() - a.getPosX()) / Math.cos(a.getAngle().getRadian()));
 		}
 
 		if (angle == 0 || angle == 180) {
 			y = b.getPosY();
 			exept2 = true;
 		} else {
-			y = (int) ((b.getPosY() - a.getPosY()) / Math.sin(a.getAngle().getRadian()));
+			y =(int)((b.getPosY() - a.getPosY()) / Math.sin(a.getAngle().getRadian()));
 		}
 
 		if (exept1) {
@@ -56,7 +64,13 @@ public class Collision {
 			return false;
 	}
 
-	public static void LineLine(Line a, Line b) {
+	/**
+	 * Check if twoLines are colliding
+	 * @param a a line
+	 * @param b an other line
+	 * @return true if there are colliding
+	 */
+	public static boolean lineLine(Line a, Line b) {
 		
 		
 		String t1, t2 , t3, t4;
@@ -157,13 +171,16 @@ public class Collision {
 			y = true;
 		}
 		
-		//System.out.println(x);
-		//System.out.println(y);
-		//System.out.println(x && y);
-		
+		return (x && y);
 	}
 
-	public static boolean BlocEntity(Bloc a, Entity b) {
+	/**
+	 * Check if a Bloc and an Entity are colliding
+	 * @param a the Bloc
+	 * @param b the Entity
+	 * @return true if they are colliding
+	 */
+	public static boolean blocEntity(Bloc a, Entity b) {
 		boolean faces[] = new boolean[8];
 		faces[0] = (b.getPosX() >= Math.min(a.getCornerX(1), a.getCornerX(2))
 				&& (b.getPosX() <= Math.max(a.getCornerX(1), a.getCornerX(2))));
@@ -196,4 +213,102 @@ public class Collision {
 		} else
 			return false;
 	}
+	
+	/**
+	 * Check if two Bloc are colliding
+	 * @param a a Bloc
+	 * @param b a Bloc
+	 * @return true if are are colliding
+	 */
+	public static boolean blocBloc(Bloc a, Bloc b){
+		double cos = Math.cos(a.getAngle().getRadian());
+		double sin = Math.sin(a.getAngle().getRadian());
+		double[] a1 = rotateCoordinate(a.getCornerX(1), a.getCornerY(1), cos, sin);
+		System.out.println(a1[0]+", "+a1[1]);
+		double[] a2 = rotateCoordinate(a.getCornerX(2), a.getCornerY(2), cos, sin);
+		System.out.println(a2[0]+", "+a2[1]);
+		double[] a4 = rotateCoordinate(a.getCornerX(4), a.getCornerY(4), cos, sin);
+		System.out.println(a4[0]+", "+a4[1]);
+		double[][] bn = new double[4][2];
+		bn[0] = rotateCoordinate(b.getCornerX(1), b.getCornerY(1), cos, sin);
+		bn[1] = rotateCoordinate(b.getCornerX(2), b.getCornerY(2), cos, sin);
+		bn[2] = rotateCoordinate(b.getCornerX(3), b.getCornerY(3), cos, sin);
+		bn[3] = rotateCoordinate(b.getCornerX(4), b.getCornerY(4), cos, sin);
+		
+		boolean contact = false;
+		int i = 0;
+		while (!contact && i<4) {
+			if ( a1[0] <= bn[i][0] && bn[i][0] <= a2[0] && a1[1] <= bn[i][1] && bn[i][1] <= a4[1]){
+				contact = true;
+			}
+			i++;
+		}
+		cos = Math.cos(b.getAngle().getRadian());
+		sin = Math.sin(b.getAngle().getRadian());
+		double[] b1 = rotateCoordinate(b.getCornerX(1), b.getCornerY(1), cos, sin);
+		double[] b2 = rotateCoordinate(b.getCornerX(2), b.getCornerY(2), cos, sin);
+		double[] b3 = rotateCoordinate(b.getCornerX(4), b.getCornerY(4), cos, sin);
+		double[][] an = new double[4][2];
+		an[0] = rotateCoordinate(a.getCornerX(1), a.getCornerY(1), cos, sin);
+		an[1] = rotateCoordinate(a.getCornerX(2), a.getCornerY(2), cos, sin);
+		an[2] = rotateCoordinate(a.getCornerX(3), a.getCornerY(3), cos, sin);
+		an[3] = rotateCoordinate(a.getCornerX(4), a.getCornerY(4), cos, sin);
+		
+		
+		i = 0;
+		while (!contact && i<4) {
+			if ( b1[0] <= an[i][0] && an[i][0] <= b2[0] && b1[1] <= an[i][1] && an[i][1] <= b3[1]){
+				contact = true;
+			}
+			i++;
+		}
+		return contact;
+	}
+
+	/**
+	 * 
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param a an angle
+	 * @return the coordinate of the point once the scene as been rotated
+	 */
+	public static double[] rotateCoordinate(double x, double y, Angle a){
+		double[] res = new double[2];
+		double rad = a.getRadian();
+		double t1, t2;
+		t1 = Math.cos(rad);
+		t2 = Math.sin(rad);
+		res[0] = (x * t1 - y * t2);
+		res[1] = (x * t2 + y * t1);
+		return res;
+	}
+
+	/**
+	 * 
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param cos the cosinus of the angle
+	 * @param sin the sin if the angle
+	 * @return the coordinate of the point once the scene as rotated
+	 */
+	public static double[] rotateCoordinate(double x, double y, double cos, double sin){
+		double[] res = new double[2];
+		res[0] = ( x * cos + y * sin);
+		res[1] = ( -(x * sin) + y * cos);
+		return res;
+	}
+	
+	/**
+	 * Transform a double in an int with rounding
+	 * exemple: 2.6 -> 3; 2.4 -> 2
+	 * @param d the double
+	 * @return an int corresponding to the double
+	 */
+	public static int toInt(double d){
+		double cent =d - (int)d;
+		if (cent >0.50){ return (int)(d+1);}
+		return ((int)d);
+	}
+	
+	
 }
