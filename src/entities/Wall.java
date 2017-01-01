@@ -30,7 +30,7 @@ public class Wall extends Bloc{
 	 * @see Angle
 	 */
 	public Wall(int posX, int posY, int length, int width, Angle angle){
-		super(posX, posY, length, width, angle);
+		super(posX, posY, length, width, angle, true);
 		this.id	= walls.size();
 		walls.add(this);
 	}
@@ -46,7 +46,7 @@ public class Wall extends Bloc{
 	 * @see Angle
 	 */
 	public Wall(int posX, int posY, int length, int width, int angleDegree){
-		super(posX, posY, length, width, angleDegree);
+		super(posX, posY, length, width, angleDegree, true);
 		this.id	= walls.size();
 		walls.add(this);
 	}

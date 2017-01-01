@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import entities.Entity;
+import entities.Updatable;
 import entities.Wall;
 
 import java.io.BufferedReader;
@@ -26,6 +27,7 @@ public class Maze {
 	 * The list of all the mazes 
 	 */
 	public static ArrayList<Maze> mazes = new ArrayList<Maze>();
+	public static Maze activeMaze;
 	
 // Constructors -----------------------------------------------
 	/**
@@ -59,6 +61,19 @@ public class Maze {
 		}
 	}
 	
+	/**
+	 * get all updatable item of the maze
+	 * @return an arraylist of all runnable
+	 */
+	public ArrayList<Updatable> getUpdatable(){
+		ArrayList<Updatable> updatables = new ArrayList<>();
+		for (Entity e : maze) {
+			if (e instanceof Updatable){
+				updatables.add((Updatable) e);
+			}
+		}
+		return updatables;
+	}
 // Static methods ---------------------------------------------	
 	/**
 	 * extract the values given in a String
@@ -99,7 +114,7 @@ public class Maze {
 	 */
 	public static Maze createMaze(String fileName){
 		BufferedReader c;
-		System.out.println(fileName);
+		
 		try {
 			String currentLine;
 			c =new BufferedReader( new FileReader(fileName));
@@ -114,7 +129,8 @@ public class Maze {
 			ArrayList<Integer> buff = new ArrayList<Integer>(); 
 			while ((currentLine = c.readLine()) != null){
 				if (currentLine.equals("wall") || currentLine.equals("door") || currentLine.equals("stair")
-						|| currentLine.equals("elevator") || currentLine.equals("key") || currentLine.equals("character")){
+						|| currentLine.equals("elevator") || currentLine.equals("key") || currentLine.equals("character")
+						|| currentLine.equals("player")){
 					type = currentLine;
 				}
 				else{
@@ -125,8 +141,10 @@ public class Maze {
 							maze.addEntityToMaze(new Wall(buff.get(0),buff.get(1),buff.get(2),buff.get(3),buff.get(4)));
 							break;
 						case "character":
-							maze.addEntityToMaze(new entities.Character(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), buff.get(6)));
+							maze.addEntityToMaze(new entities.Character(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
 							break;
+						case "player":
+							maze.addEntityToMaze(new entities.Player(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), buff.get(6)));
 						default:
 					}
 					

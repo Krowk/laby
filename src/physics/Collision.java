@@ -1,8 +1,12 @@
 package physics;
 
+import java.util.ArrayList;
+
+import Main.Maze;
 import entities.Bloc;
 import entities.Entity;
 import entities.Line;
+
 
 public class Collision {
 // Fields -----------------------------------------------------
@@ -221,14 +225,16 @@ public class Collision {
 	 * @return true if are are colliding
 	 */
 	public static boolean blocBloc(Bloc a, Bloc b){
+		int j = b.getPosY();
+		int k = a.getPosX();
 		double cos = Math.cos(a.getAngle().getRadian());
 		double sin = Math.sin(a.getAngle().getRadian());
 		double[] a1 = rotateCoordinate(a.getCornerX(1), a.getCornerY(1), cos, sin);
-		System.out.println(a1[0]+", "+a1[1]);
+		
 		double[] a2 = rotateCoordinate(a.getCornerX(2), a.getCornerY(2), cos, sin);
-		System.out.println(a2[0]+", "+a2[1]);
+		
 		double[] a4 = rotateCoordinate(a.getCornerX(4), a.getCornerY(4), cos, sin);
-		System.out.println(a4[0]+", "+a4[1]);
+		
 		double[][] bn = new double[4][2];
 		bn[0] = rotateCoordinate(b.getCornerX(1), b.getCornerY(1), cos, sin);
 		bn[1] = rotateCoordinate(b.getCornerX(2), b.getCornerY(2), cos, sin);
@@ -238,7 +244,7 @@ public class Collision {
 		boolean contact = false;
 		int i = 0;
 		while (!contact && i<4) {
-			if ( a1[0] <= bn[i][0] && bn[i][0] <= a2[0] && a1[1] <= bn[i][1] && bn[i][1] <= a4[1]){
+			if ( a1[0] < bn[i][0] && bn[i][0] < a2[0] && a1[1] < bn[i][1] && bn[i][1] < a4[1]){
 				contact = true;
 			}
 			i++;
@@ -257,7 +263,7 @@ public class Collision {
 		
 		i = 0;
 		while (!contact && i<4) {
-			if ( b1[0] <= an[i][0] && an[i][0] <= b2[0] && b1[1] <= an[i][1] && an[i][1] <= b3[1]){
+			if ( b1[0] < an[i][0] && an[i][0] < b2[0] && b1[1] < an[i][1] && an[i][1] < b3[1]){
 				contact = true;
 			}
 			i++;
@@ -265,6 +271,64 @@ public class Collision {
 		return contact;
 	}
 
+	public static boolean collision(Bloc a){
+		ArrayList<Entity> maze = Maze.activeMaze.getMazeContent();
+		//int[] aCollisionArea = a.getCollisionArea();
+		//int[] bCollisionArea;
+		boolean bool = false;
+		double d = 0;
+		for (Entity e : maze) {
+			if (e instanceof Bloc && e != a){
+				int j =e.getPosY();
+				d = distance(a, e);
+				Bloc b = (Bloc) e; 
+				if( d <= b.getLongest() + a.getLongest()){
+					bool = true;
+					
+				}
+				
+				/*
+				bCollisionArea = b.getCollisionArea();
+				for (int i = 0; i < 2; i++) {
+					if (aCollisionArea[i] < bCollisionArea[i] && bCollisionArea[i] < aCollisionArea[i+1] ){
+						if (aCollisionArea[2] < bCollisionArea[2] && bCollisionArea[2] < aCollisionArea[3]){
+							bool = true;
+							break;
+						}
+						else if (aCollisionArea[2] < bCollisionArea[3] && bCollisionArea[3] < aCollisionArea[3]){
+							bool = true;
+							break;
+						}
+					}
+					if (bCollisionArea[i] < aCollisionArea[i] && aCollisionArea[i] < bCollisionArea[i+1] ){
+						if (bCollisionArea[2] < aCollisionArea[2] && aCollisionArea[2] < bCollisionArea[3]){
+							bool = true;
+							break;
+						}
+						else if (bCollisionArea[2] < aCollisionArea[3] && aCollisionArea[3] < bCollisionArea[3]){
+							bool = true;
+							break;
+						}
+					}
+				}
+				*/
+				if(bool){
+					if(blocBloc(a, b)){
+						return true;
+					}
+					else bool = false;
+				}
+			}
+			
+		}
+		return false;
+	}
+
+	public static double distance(Entity a, Entity b){
+		return Math.sqrt(Math.pow(b.getPosX() - a.getPosX(), 2)+ Math.pow(b.getPosY() - a.getPosY(),2));
+	}
+	
+	
 	/**
 	 * 
 	 * @param x the x coordinate

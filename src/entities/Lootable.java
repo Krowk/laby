@@ -20,8 +20,8 @@ public abstract class Lootable extends Entity {
 	 * @param id
 	 * 			: id of the object
 	 */
-	public Lootable(int posX, int posY, int id, String name) {
-		super(posX, posY);
+	public Lootable(int posX, int posY, int id, String name, boolean isSolid) {
+		super(posX, posY, isSolid);
 		this.id = id;
 		this.name = name;
 	}

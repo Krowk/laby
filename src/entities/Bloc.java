@@ -6,6 +6,8 @@ import physics.Angle;
  */
 public abstract class Bloc extends Entity{
 // Fields -----------------------------------------------------
+	// static fields
+	// dynamic fields
 	/**
 	 * The width of the Bloc
 	 */
@@ -18,6 +20,8 @@ public abstract class Bloc extends Entity{
 	 * The angle of the Bloc
 	 */
 	protected Angle angle;
+	protected int longest;
+	
 	
 // Constructors -----------------------------------------------
 	/**
@@ -30,11 +34,13 @@ public abstract class Bloc extends Entity{
 	 * @see Entity
 	 * @see Angle
 	 */
-	public Bloc(int posX, int posY, int length, int width, Angle angle) {
-		super(posX, posY);
+	public Bloc(int posX, int posY, int length, int width, Angle angle, boolean isSolid) {
+		super(posX, posY, isSolid);
 		this.length = length;
 		this.width = width;
 		this.angle	= angle;
+		if (width >= length)  longest = width;
+		else longest = length;
 	}
 	
 	/**
@@ -47,11 +53,13 @@ public abstract class Bloc extends Entity{
 	 * @see Entity
 	 * @see Angle
 	 */
-	public Bloc(int posX, int posY, int length, int width, int angleDegree) {
-		super(posX, posY);
+	public Bloc(int posX, int posY, int length, int width, int angleDegree, boolean isSolid) {
+		super(posX, posY, isSolid);
 		this.length = length;
 		this.width = width;
 		this.angle	= new Angle(angleDegree);
+		if (width >= length)  longest = width;
+		else longest = length;
 	}
 	
 // dynamic methods --------------------------------------------
@@ -98,6 +106,26 @@ public abstract class Bloc extends Entity{
 			return (res + Math.sin(this.angle.getRadian()+Math.PI)* this.length);
 		}
 	}
+
+	public int[] getCollisionArea(){
+		int[] res = new int[4];
+		int x;
+		if (width >= length)  x = width;
+		else x = length;
+		
+		
+		res[0] = posX - x;
+		res[1] = posX + x;
+		res[2] = posY - x;
+		res[3] = posY + x;
+		return res;
+	}
+	
+	
+	
+	public void update(){
+		super.update();
+	}
 // static methods ---------------------------------------------
 	
 // getters ----------------------------------------------------
@@ -117,5 +145,6 @@ public abstract class Bloc extends Entity{
 	 */
 	public Angle getAngle(){return this.angle;}
 	
+	public int getLongest(){ return this.longest;}
 // setters ----------------------------------------------------
 }

@@ -1,13 +1,14 @@
 package entities;
 
+
 import java.util.HashMap;
 
 
 /**
  * A Character is a Bloc with a life
  */
-public class Character extends Bloc {
-	
+public class Character extends Bloc implements Updatable{
+	/*
 	public static void main (String[] args){
 		Character c = new Character(0,0,10,10,100,50,3);
 		c.affiche();
@@ -22,17 +23,17 @@ public class Character extends Bloc {
 		c.affiche();
 		
 	}
-
+	 */
 // Fields------------------------------------------------------------------------
+	// static fields
+	public static int numId = 0;
+	public static HashMap<Integer,Character> characters = new HashMap<Integer,Character>();
 	
+	// dynamic fields
 	private int id;
 	private int life;
 	private int force;
-	private Lootable tabItems[];
-	//private int itemsMax;
-	public static int numId = 0;
-	public static HashMap<Integer,Character> characters = new HashMap<Integer,Character>();
-
+	private String type = "character";
 // Constructors ------------------------------------------------------------------
 	
 	/**
@@ -49,12 +50,11 @@ public class Character extends Bloc {
 	 * @param life
 	 *            : the life of the character : int
 	 */
-	public Character(int posX, int posY, int length, int width, int life, int force, int itemsMax) {
-		super(posX, posY, length, width, 0);
+	public Character(int posX, int posY, int length, int width, int life, int force) {
+		super(posX, posY, length, width, 0, true);
 		this.id = numId;
 		this.life = life;
 		this.force = force;
-		this.tabItems = new Lootable[itemsMax];
 		characters.put(id,this);
 		numId+=1;
 	}
@@ -70,23 +70,21 @@ public class Character extends Bloc {
 	}
 
 	/**
-	 * Winning life
+	 * Gaining life
 	 * @param x: x is the gain of life (int)
 	 */
-	public void winLife(int x) {
+	public void gainLife(int x) {
 		this.life = this.life + x;
 	}
-
 	
 	/**
-	 * Winning force
+	 * Gaining force
 	 * @param x : x is the gain of force (int)
 	 */
-	public void winForce(int x) {
+	public void gainForce(int x) {
 		this.force = this.force + x;
 	}
-	
-	
+		
 	/**
 	 * Losing life
 	 * @param x : x is the force losed (int)
@@ -94,10 +92,9 @@ public class Character extends Bloc {
 	public void loseForce(int x) {
 		this.force = this.force - x;
 	}
-	
-	
+		
 	/**
-	 * Killing a character
+	 * Kil a character
 	 */
 	public void death(){
 		
@@ -121,50 +118,10 @@ public class Character extends Bloc {
 		System.out.println("life: " + this.life);
 		System.out.println("force" + this.force);
 	}
-	
-	/**
-	 * Put a element lootable in the inventory
-	 * 
-	 * @param x 
-	 * 			: x is the element lootable
-	 */
-	public void putInInventory(Lootable x){
-		int i = 0;
-		int item = 1;
-		
-		while( i < tabItems.length && item > 0){
-			
-			if(tabItems[i] == null){
-				tabItems[i]=x;
-				item = item-1;
-			}
-			
-			i++;
-		}
-	}
-	
-	public void affiche(){
-		for (int i = 0; i < tabItems.length; i++) {
-			if(tabItems[i]==null){
-				System.out.println("Element "+i+" : est vide");
-			}
-			else{
-			System.out.println("Element "+i+" : "+ tabItems[i].getName());
-			}
-		}
-	}
-	
-	public void deletItem(Lootable x){
-		for (int i = 0; i < tabItems.length; i++) {
-			if(x.getId() == tabItems[i].getId()){
-				tabItems[i]=null;
-			}
-		}
-		
-		
-	}
 
-	
+	public void update(){
+		super.update();
+	}
 // Static methods --------------------------------------------------------------
 	
 	/**
@@ -225,6 +182,9 @@ public class Character extends Bloc {
 		return this.life;
 	}
 	
+	public String getType(){
+		return this.type;
+	}
 	
 
 // setters ---------------------------------------------------------------------

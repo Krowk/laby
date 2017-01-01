@@ -2,20 +2,27 @@ package Main;
 
 import java.util.ArrayList;
 
-import Drawing.AwtManager;
+import entities.Bloc;
+import entities.Updatable;
+import physics.Collision;
+import window.AwtManager;
 
 
 public class Main {
 // Constantes -----------------------------------------------------
-	private static int FPS_target	= 32;
-	private static int TPS_target	= 32;
+	private static int FPS_target	= 64;
+	private static int TPS_target	= 128;
 	private static int FrameRate	= 1000000000 / FPS_target;
 	private static int TickRate		= 1000000000 / TPS_target;
-
+	private static ArrayList<ArrayList<Integer>> keys;
+	
 	public static void main(String[] args) {
 		AwtManager awtManager = new AwtManager();
-		
 		Maze maze = Maze.createMaze("src/test.txt");
+		Maze.activeMaze = maze;
+		
+		Collision.collision((Bloc) maze.getMazeContent().get(0));
+		ArrayList<Updatable> updatables = new ArrayList<>();
 		if (maze != null){
 			// FPS calculations ---------------------------------------
 			long currentTime;
@@ -26,8 +33,8 @@ public class Main {
 			long elapsedTime2 = 0;
 			long elapsedTimeSinceFrame;
 			long elapsedTimeSinceTick;
-			int actualFPS = 32;
-			int actualTPS = 32;
+			int actualFPS = FPS_target;
+			int actualTPS = TPS_target;
 			double FPS = 0;
 			double TPS = 0;
 			//int[] tab = new int[8];
@@ -50,7 +57,7 @@ public class Main {
 				
 				while (elapsedTime2 >= FrameRate) {
 					actualFPS--;
-					elapsedTime2 -= TickRate;
+					elapsedTime2 -= FrameRate;
 				}
 				while (elapsedTime1 >= TickRate) {
 					actualTPS--;
@@ -64,8 +71,15 @@ public class Main {
 					actualTPS++;
 					TPS_tab.add(actualTPS);
 					TPS_tab.remove(0);
-					//update()
+					//awtManager.blup();
+					////////////////////////
 					
+					updatables = maze.getUpdatable();
+					keys = awtManager.getKeys();
+					for (Updatable u : updatables) {
+						u.update();
+					}
+					////////////////////////
 					lastTick = System.nanoTime();
 					actualTPS =0;
 				}
@@ -87,7 +101,7 @@ public class Main {
 					}
 					FPS /= 32;
 					TPS /= 32;
-					awtManager.render(maze, (32 / (-(FPS-1))), 32 / (-(TPS-1)) );
+					awtManager.render(maze, (FPS_target / (-(FPS-1))), TPS_target / (-(TPS-1)) );
 					lastFrame = System.nanoTime();
 					actualFPS = 0;
 				}
@@ -95,9 +109,10 @@ public class Main {
 			}
 			
 		}
-		
-		
-		
+	}
+	
+	public static ArrayList<ArrayList<Integer>> getKeys(){
+		return keys;
 	}
 
 }
