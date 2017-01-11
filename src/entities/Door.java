@@ -40,5 +40,7 @@ public class Door {
 	
 	// getters
 	
+	public int getId(){	return this.id;	}
+	
 	// setters
 }

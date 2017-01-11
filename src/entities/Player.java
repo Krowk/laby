@@ -112,10 +112,28 @@ public class Player extends Character implements Updatable{
 		}
 		super.update();
 	}
+	
+	
+	public boolean useKey(Key k,Door d){
+		if(k.getId()==d.getId()){
+			return true;
+		}
+		return false;
+	}
+
 
 // Static methods ---------------------------------------------------------------	
 	
 // Getters ----------------------------------------------------------------------	
+	
+	public int getposX(){
+		return this.posX;
+	}
+	
+	
+	public int getposY(){
+		return this.posY;
+	}
 	
 // Setters ----------------------------------------------------------------------
 }

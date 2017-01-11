@@ -122,6 +122,9 @@ public class Character extends Bloc implements Updatable{
 	public void update(){
 		super.update();
 	}
+	
+	
+	
 // Static methods --------------------------------------------------------------
 	
 	/**
