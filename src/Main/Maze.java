@@ -3,9 +3,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import entities.Entity;
-import entities.Updatable;
-import entities.Wall;
+import com.sun.media.jfxmedia.MediaException;
+
+import entities.*;
 
 import java.io.BufferedReader;
 
@@ -130,21 +130,27 @@ public class Maze {
 			while ((currentLine = c.readLine()) != null){
 				if (currentLine.equals("wall") || currentLine.equals("door") || currentLine.equals("stair")
 						|| currentLine.equals("elevator") || currentLine.equals("key") || currentLine.equals("character")
-						|| currentLine.equals("player")){
+						|| currentLine.equals("player") || currentLine.equals("cook") || currentLine.equals("medic")){
 					type = currentLine;
 				}
 				else{
 					buff = lineToInt(currentLine);
 					switch (type){
 						case "wall":
-							
 							maze.addEntityToMaze(new Wall(buff.get(0),buff.get(1),buff.get(2),buff.get(3),buff.get(4)));
 							break;
 						case "character":
 							maze.addEntityToMaze(new entities.Character(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
 							break;
 						case "player":
-							maze.addEntityToMaze(new entities.Player(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), buff.get(6)));
+							maze.addEntityToMaze(new Player(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), buff.get(6)));
+							break;
+						case "cook":
+							maze.addEntityToMaze(new Cook(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5),0, buff.get(6), null));
+							break;
+						case "medic":
+							maze.addEntityToMaze(new Medic(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
+							break;
 						default:
 					}
 					

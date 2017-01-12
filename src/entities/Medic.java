@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Medic extends Character implements Updatable{
 // Fields------------------------------------------------------------------------
-	
+	// transforme ça en boolean non?
 	private int visite;
 	
 // Constructors -----------------------------------------------------------------	
-	public Medic(int posX, int posY, int length, int width, int life, int force, int nombreFoods, int nombreFoodsMax, int visite) {
+	public Medic(int posX, int posY, int length, int width, int life, int force) {
 		super(posX, posY, length, width, life, force);
 		this.visite = 1;
 	}

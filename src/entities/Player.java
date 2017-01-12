@@ -133,31 +133,36 @@ public class Player extends Character implements Updatable{
 	
 	public boolean collision(Bloc b){
 		boolean res = super.collision(b);
-		
-		if(b instanceof Cook){
-			Cook c = (Cook) b;
-			
-			if(c.getNombreFoods()>0){
-				this.putInInventory(c.getFood());
-				c.removeFood();
-			}		
-		}
-		
-		else if (b instanceof Monster){
-			Monster m = (Monster) b;
-			attack(this,(Character) b);			
-			
-		}
-		
-		else if (b instanceof Medic){
-			Medic m = (Medic) b;
-			
-			if(m.getVisite() != 0 ){
-				this.life = life + 50;
-				m.havebeenvisited();
+		if (res){
+			System.out.println(life + " " + force);
+			printInventory();
+			if(b instanceof Cook){
+				Cook c = (Cook) b;
+				
+				if(c.getNombreFoods()>0){
+					this.putInInventory(c.getFood());
+					c.removeFood();
+				}		
 			}
+			
+			else if (b instanceof Monster){
+				Monster m = (Monster) b;
+				attack(this,(Character) b);			
+				
+			}
+			
+			else if (b instanceof Medic){
+				Medic m = (Medic) b;
+				
+				if(m.getVisite() != 0 ){
+					this.life = life + 50;
+					m.havebeenvisited();
+				}
+			}
+			
+			System.out.println(life + " " + force);
+			printInventory();
 		}
-		
 		return res;
 	}
 // Static methods ---------------------------------------------------------------	
