@@ -139,6 +139,21 @@ public class Player extends Character implements Updatable{
 		}
 	}
 	
+	public boolean collision(Bloc b){
+		boolean res = super.collision(b);
+		// met tes trucs ici genre:
+		// if (b instanceof Cook){
+		//   Cook c = (Cook) b
+		//   a.voleDeLaBouf(c)
+		// }
+		// else if ( b instanceof Monstre){
+		//  Monstre m = (Monstre) m
+		// 	a.attaque(b)
+		// }
+		// si tu veux qu'un autre objet initie un truc quand il entre en collision tu copie cette fonction dans l'objet en question
+		
+		return res;
+	}
 // Static methods ---------------------------------------------------------------	
 	
 // Getters ----------------------------------------------------------------------	

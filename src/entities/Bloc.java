@@ -1,5 +1,9 @@
 package entities;
+import java.util.ArrayList;
+
+import Main.Maze;
 import physics.Angle;
+import physics.Collision;
 
 /**
  * a Bloc is an entity with a length and a width
@@ -121,7 +125,54 @@ public abstract class Bloc extends Entity{
 		return res;
 	}
 	
+
 	
+	public boolean collision(Bloc b){
+		double cos = Math.cos(angle.getRadian());
+		double sin = Math.sin(angle.getRadian());
+		
+		double[] a1 = Collision.rotateCoordinate(getCornerX(1), getCornerY(1), cos, sin);
+		double[] a2 = Collision.rotateCoordinate(getCornerX(2), getCornerY(2), cos, sin);
+		double[] a4 = Collision.rotateCoordinate(getCornerX(4), getCornerY(4), cos, sin);
+		
+		double[][] bn = new double[4][2];
+		bn[0] = Collision.rotateCoordinate(b.getCornerX(1), b.getCornerY(1), cos, sin);
+		bn[1] = Collision.rotateCoordinate(b.getCornerX(2), b.getCornerY(2), cos, sin);
+		bn[2] = Collision.rotateCoordinate(b.getCornerX(3), b.getCornerY(3), cos, sin);
+		bn[3] = Collision.rotateCoordinate(b.getCornerX(4), b.getCornerY(4), cos, sin);
+		
+		boolean contact = false;
+		int i = 0;
+		while (!contact && i<4) {
+			if ( a1[0] < bn[i][0] && bn[i][0] < a2[0] && a1[1] < bn[i][1] && bn[i][1] < a4[1]){
+				contact = true;
+			}
+			i++;
+		}
+		
+		cos = Math.cos(b.getAngle().getRadian());
+		sin = Math.sin(b.getAngle().getRadian());
+		
+		double[] b1 = Collision.rotateCoordinate(b.getCornerX(1), b.getCornerY(1), cos, sin);
+		double[] b2 = Collision.rotateCoordinate(b.getCornerX(2), b.getCornerY(2), cos, sin);
+		double[] b3 = Collision.rotateCoordinate(b.getCornerX(4), b.getCornerY(4), cos, sin);
+		
+		double[][] an = new double[4][2];
+		an[0] = Collision.rotateCoordinate(getCornerX(1), getCornerY(1), cos, sin);
+		an[1] = Collision.rotateCoordinate(getCornerX(2), getCornerY(2), cos, sin);
+		an[2] = Collision.rotateCoordinate(getCornerX(3), getCornerY(3), cos, sin);
+		an[3] = Collision.rotateCoordinate(getCornerX(4), getCornerY(4), cos, sin);
+		
+		i = 0;
+		while (!contact && i<4) {
+			if ( b1[0] < an[i][0] && an[i][0] < b2[0] && b1[1] < an[i][1] && an[i][1] < b3[1]){
+				contact = true;
+			}
+			i++;
+		}
+		return contact;
+	}
+
 	
 	public void update(){
 		super.update();

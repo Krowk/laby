@@ -218,108 +218,25 @@ public class Collision {
 			return false;
 	}
 	
-	/**
-	 * Check if two Bloc are colliding
-	 * @param a a Bloc
-	 * @param b a Bloc
-	 * @return true if are are colliding
-	 */
-	public static boolean blocBloc(Bloc a, Bloc b){
-		int j = b.getPosY();
-		int k = a.getPosX();
-		double cos = Math.cos(a.getAngle().getRadian());
-		double sin = Math.sin(a.getAngle().getRadian());
-		double[] a1 = rotateCoordinate(a.getCornerX(1), a.getCornerY(1), cos, sin);
-		
-		double[] a2 = rotateCoordinate(a.getCornerX(2), a.getCornerY(2), cos, sin);
-		
-		double[] a4 = rotateCoordinate(a.getCornerX(4), a.getCornerY(4), cos, sin);
-		
-		double[][] bn = new double[4][2];
-		bn[0] = rotateCoordinate(b.getCornerX(1), b.getCornerY(1), cos, sin);
-		bn[1] = rotateCoordinate(b.getCornerX(2), b.getCornerY(2), cos, sin);
-		bn[2] = rotateCoordinate(b.getCornerX(3), b.getCornerY(3), cos, sin);
-		bn[3] = rotateCoordinate(b.getCornerX(4), b.getCornerY(4), cos, sin);
-		
-		boolean contact = false;
-		int i = 0;
-		while (!contact && i<4) {
-			if ( a1[0] < bn[i][0] && bn[i][0] < a2[0] && a1[1] < bn[i][1] && bn[i][1] < a4[1]){
-				contact = true;
-			}
-			i++;
-		}
-		cos = Math.cos(b.getAngle().getRadian());
-		sin = Math.sin(b.getAngle().getRadian());
-		double[] b1 = rotateCoordinate(b.getCornerX(1), b.getCornerY(1), cos, sin);
-		double[] b2 = rotateCoordinate(b.getCornerX(2), b.getCornerY(2), cos, sin);
-		double[] b3 = rotateCoordinate(b.getCornerX(4), b.getCornerY(4), cos, sin);
-		double[][] an = new double[4][2];
-		an[0] = rotateCoordinate(a.getCornerX(1), a.getCornerY(1), cos, sin);
-		an[1] = rotateCoordinate(a.getCornerX(2), a.getCornerY(2), cos, sin);
-		an[2] = rotateCoordinate(a.getCornerX(3), a.getCornerY(3), cos, sin);
-		an[3] = rotateCoordinate(a.getCornerX(4), a.getCornerY(4), cos, sin);
-		
-		
-		i = 0;
-		while (!contact && i<4) {
-			if ( b1[0] < an[i][0] && an[i][0] < b2[0] && b1[1] < an[i][1] && an[i][1] < b3[1]){
-				contact = true;
-			}
-			i++;
-		}
-		return contact;
-	}
-
+	
 	public static boolean collision(Bloc a){
 		ArrayList<Entity> maze = Maze.activeMaze.getMazeContent();
-		//int[] aCollisionArea = a.getCollisionArea();
-		//int[] bCollisionArea;
 		boolean bool = false;
 		double d = 0;
 		for (Entity e : maze) {
 			if (e instanceof Bloc && e != a){
-				int j =e.getPosY();
 				d = distance(a, e);
 				Bloc b = (Bloc) e; 
 				if( d <= b.getLongest() + a.getLongest()){
-					bool = true;
-					
+					bool = true;	
 				}
-				
-				/*
-				bCollisionArea = b.getCollisionArea();
-				for (int i = 0; i < 2; i++) {
-					if (aCollisionArea[i] < bCollisionArea[i] && bCollisionArea[i] < aCollisionArea[i+1] ){
-						if (aCollisionArea[2] < bCollisionArea[2] && bCollisionArea[2] < aCollisionArea[3]){
-							bool = true;
-							break;
-						}
-						else if (aCollisionArea[2] < bCollisionArea[3] && bCollisionArea[3] < aCollisionArea[3]){
-							bool = true;
-							break;
-						}
-					}
-					if (bCollisionArea[i] < aCollisionArea[i] && aCollisionArea[i] < bCollisionArea[i+1] ){
-						if (bCollisionArea[2] < aCollisionArea[2] && aCollisionArea[2] < bCollisionArea[3]){
-							bool = true;
-							break;
-						}
-						else if (bCollisionArea[2] < aCollisionArea[3] && aCollisionArea[3] < bCollisionArea[3]){
-							bool = true;
-							break;
-						}
-					}
-				}
-				*/
 				if(bool){
-					if(blocBloc(a, b)){
+					if(a.collision(b)){
 						return true;
 					}
 					else bool = false;
 				}
 			}
-			
 		}
 		return false;
 	}
