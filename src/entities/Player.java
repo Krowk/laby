@@ -130,27 +130,33 @@ public class Player extends Character implements Updatable{
 		this.force = this.force + f1.getForceGain(); 
 	}
 
-	public void medic(Medic m){
-		if (m.getposX() == this.posX && m.getposY() == this.posY){
-			
-			
-			// A FINIR ///////////////////////////////////////
-			
-		}
-	}
 	
 	public boolean collision(Bloc b){
 		boolean res = super.collision(b);
-		// met tes trucs ici genre:
-		// if (b instanceof Cook){
-		//   Cook c = (Cook) b
-		//   a.voleDeLaBouf(c)
-		// }
-		// else if ( b instanceof Monstre){
-		//  Monstre m = (Monstre) m
-		// 	a.attaque(b)
-		// }
-		// si tu veux qu'un autre objet initie un truc quand il entre en collision tu copie cette fonction dans l'objet en question
+		
+		if(b instanceof Cook){
+			Cook c = (Cook) b;
+			
+			if(c.getNombreFoods()>0){
+				this.putInInventory(c.getFood());
+				c.removeFood();
+			}		
+		}
+		
+		else if (b instanceof Monster){
+			Monster m = (Monster) b;
+			attack(this,(Character) b);			
+			
+		}
+		
+		else if (b instanceof Medic){
+			Medic m = (Medic) b;
+			
+			if(m.getVisite() != 0 ){
+				this.life = life + 50;
+				m.havebeenvisited();
+			}
+		}
 		
 		return res;
 	}

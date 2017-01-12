@@ -7,19 +7,21 @@ public class Cook extends Character implements Updatable{
 	
 	private int nombreFoodsMax;
 	private int nombreFoods;
+	private Food food;
 	
 // Constructors -----------------------------------------------------------------
-	public Cook(int posX, int posY, int length, int width, int life, int force, int nombreFoods, int nombreFoodsMax) {
+	public Cook(int posX, int posY, int length, int width, int life, int force, int nombreFoods, int nombreFoodsMax, Food food) {
 		super(posX, posY, length, width, life, force);
 		this.nombreFoods = nombreFoods;
 		this.nombreFoodsMax = nombreFoodsMax;
+		this.food = food;
 	}
 	
 // Dynamic methods --------------------------------------------------------------	
 	/**
 	 * All 5 minutes he earns 1 food while he isn't full
 	 */
-	public void GainFood(){
+	public void gainFood(){
 
 		if(nombreFoods < nombreFoodsMax){
 			int timeInMillisecondes = 1000;
@@ -40,6 +42,10 @@ public class Cook extends Character implements Updatable{
 		}
 	}
 	
+	public void removeFood(){
+		this.nombreFoods = nombreFoods-1;
+	}
+	
 // Static methods ---------------------------------------------------------------	
 	
 // Getters ----------------------------------------------------------------------	
@@ -51,6 +57,13 @@ public class Cook extends Character implements Updatable{
 		return this.posY;
 	}
 	
+	public Food getFood(){
+		return this.food;
+	}
+	
+	public int getNombreFoods(){
+		return this.nombreFoods;
+	}
 // Setters ----------------------------------------------------------------------
 	
 	
