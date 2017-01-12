@@ -7,9 +7,10 @@ public class Player extends Character implements Updatable{
 // Fields------------------------------------------------------------------------
 	// static fields
 	
-	// dynamic fields
+	// dynamic fields	
 	private Lootable tabItems[];
 	private int itemsMax;
+	
 // Constructors -----------------------------------------------------------------
 	public Player(int posX, int posY, int length, int width, int life, int force, int itemsMax) {
 		super(posX, posY, length, width, life, force);
@@ -60,7 +61,6 @@ public class Player extends Character implements Updatable{
 		
 	}
 
-	
 	public void update(){
 		ArrayList<Integer>keys = Main.getKeys().get(0);
 		ArrayList<Integer>thing = Main.getKeys().get(1);
@@ -112,8 +112,7 @@ public class Player extends Character implements Updatable{
 		}
 		super.update();
 	}
-	
-	
+		
 	public boolean useKey(Key k,Door d){
 		if(k.getId()==d.getId()){
 			return true;
@@ -121,19 +120,36 @@ public class Player extends Character implements Updatable{
 		return false;
 	}
 
+	/**
+	 * Gain of life and force for a character
+	 * @param f1
+	 * 			: f1 is the food (Food)
+	 */
+	public void eat(Food f1){
+		this.life = this.life + f1.getLifeGain();
+		this.force = this.force + f1.getForceGain(); 
+	}
 
+	public void medic(Medic m){
+		if (m.getposX() == this.posX && m.getposY() == this.posY){
+			
+			
+			// A FINIR ///////////////////////////////////////
+			
+		}
+	}
+	
 // Static methods ---------------------------------------------------------------	
 	
 // Getters ----------------------------------------------------------------------	
-	
 	public int getposX(){
 		return this.posX;
 	}
 	
-	
 	public int getposY(){
 		return this.posY;
 	}
+	
 	
 // Setters ----------------------------------------------------------------------
 }

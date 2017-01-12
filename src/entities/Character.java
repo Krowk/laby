@@ -31,8 +31,8 @@ public class Character extends Bloc implements Updatable{
 	
 	// dynamic fields
 	private int id;
-	private int life;
-	private int force;
+	protected int life;
+	protected int force;
 	private String type = "character";
 // Constructors ------------------------------------------------------------------
 	
@@ -190,6 +190,6 @@ public class Character extends Bloc implements Updatable{
 	}
 	
 
-// setters ---------------------------------------------------------------------
+// Setters ---------------------------------------------------------------------
 
 }

@@ -99,7 +99,7 @@ public abstract class Entity {
 	public int getPosY(){ return this.posY;}
 
 	
-// setters ----------------------------------------------------
+// Setters ----------------------------------------------------
 	public void setSpeedX(double i){
 		speedX += i; 
 		if (speedX > speedMax){
