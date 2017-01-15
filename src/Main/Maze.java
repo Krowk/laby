@@ -51,6 +51,7 @@ public class Maze {
 		this.maze.add(entity);
 	}
 
+	
 	/**
 	 * Call the methods show() of all entities in the maze
 	 */
@@ -130,7 +131,8 @@ public class Maze {
 			while ((currentLine = c.readLine()) != null){
 				if (currentLine.equals("wall") || currentLine.equals("door") || currentLine.equals("stair")
 						|| currentLine.equals("elevator") || currentLine.equals("key") || currentLine.equals("character")
-						|| currentLine.equals("player") || currentLine.equals("cook") || currentLine.equals("medic")){
+						|| currentLine.equals("player") || currentLine.equals("cook") || currentLine.equals("medic")
+						|| currentLine.equals("monster")){
 					type = currentLine;
 				}
 				else{
@@ -151,6 +153,9 @@ public class Maze {
 						case "medic":
 							maze.addEntityToMaze(new Medic(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
 							break;
+						case "monster":
+							maze.addEntityToMaze(new Monster(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
+						break;
 						default:
 					}
 					
@@ -167,6 +172,10 @@ public class Maze {
 		
 	}
 
+	public static void deleteEntity(Entity e){
+		activeMaze.maze.remove(e);
+	}
+	
 // Getters -----------------------------------------------------	
 	/**
 	 * 

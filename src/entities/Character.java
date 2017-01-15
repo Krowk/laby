@@ -3,6 +3,9 @@ package entities;
 
 import java.util.HashMap;
 
+import Main.Main;
+import Main.Maze;
+
 
 /**
  * A Character is a Bloc with a life
@@ -35,7 +38,6 @@ public class Character extends Bloc {
 	protected int lifeMax;
 	protected int force;
 	protected int forceMax;
-	private String type = "character";
 // Constructors ------------------------------------------------------------------
 	
 	/**
@@ -71,6 +73,9 @@ public class Character extends Bloc {
 	 */
 	public void loseLife(int x) {
 		this.life = this.life - x;
+		if (life <= 0){
+			this.death();
+		}
 	}
 
 	/**
@@ -104,6 +109,7 @@ public class Character extends Bloc {
 		
 		if(this.life <= 0){
 			characters.remove(this.id);
+			Maze.deleteEntity(this);
 		}
 		
 	}
@@ -156,16 +162,15 @@ public class Character extends Bloc {
 		int attackC2 = c2.force;
 		
 
-		int res = (int) Math.random() * attackC1 - (int) Math.random() * healthC2;
-		int res2 = (int) Math.random() * attackC2 - (int) Math.random() * healthC1;
+		int res = (int)( Math.random() * attackC1) - (int)( Math.random() * healthC2);
+		int res2 = (int)( Math.random() * attackC2) - (int)( Math.random() * healthC1);
 
 		if (res > 0) {
-			c2.loseLife(attackC1);
+			c2.loseLife(res);
 		}
 
 		if (res2 > 0){
-			c1.loseLife(attackC2);
-
+			c1.loseLife(res2);
 		}
 
 	}

@@ -89,7 +89,7 @@ public class Player extends Character implements Updatable{
 					setSpeedY(-speedMax);
 				}
 				else{
-					setSpeedY(speedMax);
+					setSpeedY(0);
 				}
 				break;
 			case KeyEvent.VK_S:
@@ -97,7 +97,7 @@ public class Player extends Character implements Updatable{
 					setSpeedY(speedMax);					
 				}
 				else{
-					setSpeedY(-speedMax);
+					setSpeedY(0);
 				}
 				break;	
 			case KeyEvent.VK_Q:
@@ -105,7 +105,7 @@ public class Player extends Character implements Updatable{
 					setSpeedX(-speedMax);					
 				}
 				else{
-					setSpeedX(speedMax);
+					setSpeedX(0);
 				}
 				break;
 			case KeyEvent.VK_D:
@@ -113,7 +113,7 @@ public class Player extends Character implements Updatable{
 					setSpeedX(speedMax);					
 				}
 				else{
-					setSpeedX(-speedMax);
+					setSpeedX(0);
 				}
 				break;
 			default:
@@ -165,7 +165,7 @@ public class Player extends Character implements Updatable{
 			
 			else if (b instanceof Monster){
 				Monster m = (Monster) b;
-				attack(this,(Character) b);			
+				attack(this,m);			
 				
 			}
 			

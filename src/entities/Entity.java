@@ -55,7 +55,7 @@ public abstract class Entity {
 		if (this instanceof Bloc){
 			if(Collision.collision((Bloc)this)){
 				posX -= speedX;
-				
+				speedX =0;
 			}
 		}
 		
@@ -70,6 +70,7 @@ public abstract class Entity {
 		if (this instanceof Bloc){
 			if (Collision.collision((Bloc)this)){
 				posY -= speedY;
+				speedY =0;
 			}
 		}
 	}
@@ -101,22 +102,32 @@ public abstract class Entity {
 	
 // Setters ----------------------------------------------------
 	public void setSpeedX(double i){
-		speedX += i; 
-		if (speedX > speedMax){
-			speedX = speedMax;
+		if (i == 0){
+			speedX = 0;
 		}
-		else if (speedX < -speedMax){
-			speedX = -speedMax;
-		}
+		else{
+			speedX += i; 
+			if (speedX > speedMax){
+				speedX = speedMax;
+			}
+			else if (speedX < -speedMax){
+				speedX = -speedMax;
+			}
+		}	
 	}
 	
 	public void setSpeedY(double i){
-		speedY += i;
-		if (speedY > speedMax){
-			speedY = speedMax;
+		if (i == 0){
+			speedY = 0;
 		}
-		else if (speedY < -speedMax){
-			speedY = -speedMax;
+		else{
+			speedY += i;
+			if (speedY > speedMax){
+				speedY = speedMax;
+			}
+			else if (speedY < -speedMax){
+				speedY = -speedMax;
+			}
 		}
 	}
 
