@@ -13,8 +13,8 @@ public class Cook extends Character implements Updatable{
 // Constructors -----------------------------------------------------------------
 	public Cook(int posX, int posY, int length, int width, int life, int force, int nombreFoods, Food food) {
 		super(posX, posY, length, width, life, force);
-		this.nombreFoods = nombreFoods;
-		this.nombreFoodsMax = nombreFoodsMax;
+		this.nombreFoods = 3;
+		
 		this.food = food;
 	}
 	
@@ -25,20 +25,10 @@ public class Cook extends Character implements Updatable{
 	public void gainFood(){
 		// utiliser counter pour gérer le temps, ça compte le nombre de tick
 		if(nombreFoods < nombreFoodsMax){
-			int timeInMillisecondes = 1000;
-			int i = 300;
-			
-			while (i != 0){
-				try{
-					Thread.sleep(timeInMillisecondes);
-				}
-				catch(InterruptedException e){
-					
-				}
-				i--;
+			if (counter > 128* 10){
+				nombreFoods = nombreFoods + 1;	
+				counter = 0;
 			}
-			
-			nombreFoods = nombreFoods + 1;
 			
 		}
 	}
@@ -49,6 +39,7 @@ public class Cook extends Character implements Updatable{
 	
 	public void update(){
 		counter++;
+		gainFood();
 	}
 	
 // Static methods ---------------------------------------------------------------	

@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * A Character is a Bloc with a life
  */
-public class Character extends Bloc implements Updatable{
+public class Character extends Bloc {
 	/*
 	public static void main (String[] args){
 		Character c = new Character(0,0,10,10,100,50,3);
@@ -32,7 +32,9 @@ public class Character extends Bloc implements Updatable{
 	// dynamic fields
 	private int id;
 	protected int life;
+	protected int lifeMax;
 	protected int force;
+	protected int forceMax;
 	private String type = "character";
 // Constructors ------------------------------------------------------------------
 	
@@ -54,7 +56,9 @@ public class Character extends Bloc implements Updatable{
 		super(posX, posY, length, width, 0, true);
 		this.id = numId;
 		this.life = life;
+		this.lifeMax = life;
 		this.force = force;
+		this.forceMax = force;
 		characters.put(id,this);
 		numId+=1;
 	}
@@ -184,6 +188,13 @@ public class Character extends Bloc implements Updatable{
 	public int getLife() {
 		return this.life;
 	}
+	
+	public int getLifeMax(){
+		return lifeMax;
+	}
+	
+	public int getForce(){return force;}
+	public int getForceMax(){return forceMax;}
 	
 	public String getType(){
 		return this.type;

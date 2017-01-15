@@ -9,8 +9,9 @@ public class Player extends Character implements Updatable{
 	
 	// dynamic fields	
 	private Camera camera;
-	private Lootable tabItems[];
+	private Lootable[] tabItems;
 	private int itemsMax;
+	private int counterForce;
 	
 // Constructors -----------------------------------------------------------------
 	public Player(int posX, int posY, int length, int width, int life, int force, int itemsMax) {
@@ -69,11 +70,9 @@ public class Player extends Character implements Updatable{
 		int size = keys.size();
 		int a = 2; 
 		if (size > 0){
-			a=thing.get(0);
-			
+			a=thing.get(0);	
 		}
 		for (int i = 0; i < size; i++) {
-			
 			switch (keys.get(i)) {
 			case KeyEvent.VK_Z:
 				if (thing.get(i) == 1){
@@ -82,7 +81,6 @@ public class Player extends Character implements Updatable{
 				else{
 					setSpeedY(speedMax);
 				}
-				
 				break;
 			case KeyEvent.VK_S:
 				if (thing.get(i) == 1){
@@ -112,6 +110,11 @@ public class Player extends Character implements Updatable{
 				break;
 			}
 		}
+		counterForce++;
+		if (counterForce> 128*10){
+			loseForce(1);
+			counterForce = 0;
+		}
 		super.update();
 	}
 		
@@ -139,8 +142,8 @@ public class Player extends Character implements Updatable{
 			if(b instanceof Cook){
 				Cook c = (Cook) b;
 				
-				if(c.getNombreFoods()>0){
-					this.putInInventory(c.getFood());
+				while(c.getNombreFoods()>0){
+					putInInventory(new Food(10,false,10,0,0,0,"bouf"));
 					c.removeFood();
 				}		
 			}
@@ -171,6 +174,10 @@ public class Player extends Character implements Updatable{
 	
 	public int getposY(){
 		return this.posY;
+	}
+	
+	public Lootable[] getInventory(){
+		return tabItems;
 	}
 	
 	

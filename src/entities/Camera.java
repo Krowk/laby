@@ -29,4 +29,8 @@ public class Camera {
 		return camera;
 	}
 	
+	public Player getPlayer(){
+		return player;
+	}
+	
 }

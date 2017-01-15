@@ -3,7 +3,14 @@ package window;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import com.sun.javafx.scene.input.KeyCodeMap;
 
@@ -11,6 +18,7 @@ import Main.Maze;
 import entities.Bloc;
 import entities.Camera;
 import entities.Entity;
+import entities.Lootable;
 import entities.Player;
 import entities.Character;
 import javafx.scene.input.KeyCode;
@@ -32,7 +40,7 @@ public class AwtManager {
 	 * the thing that does magic 
 	 */
 	private BufferStrategy bs;
-	
+	private BufferedImage img;
 	private ArrayList<Integer> keys = new ArrayList<Integer>();
 	private ArrayList<Integer> thing = new ArrayList<Integer>();
 
@@ -42,8 +50,13 @@ public class AwtManager {
 	 * create an AwtManager, which open a window and set it up
 	 */
 	public AwtManager(){
+		try {
+			img = ImageIO.read(new File("src/Food1.png"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		frame = new Frame("Game");
-		
 		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(800, 450));
@@ -105,15 +118,18 @@ public class AwtManager {
 				ArrayList<Entity> content = maze.getMazeContent();
 				Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 				Camera c = Camera.getCamera();
+				int w = frame.getWidth();
+				int h = frame.getHeight();
+				
 				// #antialiasing #ezpz
 				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				g.setColor(Color.WHITE);
-				g.fillRect(0, 0, getWidth(), getHeight());
+				g.fillRect(0, 0, w, h);
 				
 				g.setColor(Color.BLACK);
 				//resizing
 				if (c != null){
-					g.scale(frame.getWidth()/c.getWidth(), frame.getHeight()/c.getHeight());
+					g.scale(w/c.getWidth(), h/c.getHeight());
 					g.translate(-c.getX()+(c.getWidth()/2),- c.getY()+(c.getHeight()/2));
 					g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
 				}
@@ -134,10 +150,32 @@ public class AwtManager {
 					
 					//g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
 					g.translate(+c.getX()-(c.getWidth()/2),+ c.getY()-(c.getHeight()/2));
-					g.scale(((double)c.getWidth()/frame.getWidth()), ((double)c.getHeight()/frame.getHeight()));
+					g.scale(((double)c.getWidth()/w), ((double)c.getHeight()/h));
 				}
+				
+				// HUD
+				g.setColor(Color.BLACK);
 				g.drawString("TPS: " +String.valueOf((int)TPS), 0, 20);
-				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 100);
+				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 40);
+				
+				Player p = c.getPlayer();
+				double l =(double)  p.getLife()/p.getLifeMax();
+				g.setColor(Color.RED);
+				g.drawRect(2*w/16, 1*h/36, 2*w/16, w/36);
+				g.setColor(Color.PINK);
+				g.fillRect((2*w/16)+1, 1*h/36, ((int) ((double)(2*w/16)*l))-1, w/36);
+				
+				double f =(double)  p.getForce()/p.getForceMax();
+				g.setColor(Color.BLACK);
+				g.drawRect(5*w/16, 1*h/36, 2*w/16, w/36);
+				g.setColor(new Color(195,143,38));
+				g.fillRect((5*w/16)+1, 1*h/36, ((int) ((double)(2*w/16)*f))-1, w/36);
+				
+				Lootable[] loots = p.getInventory();
+				int size = loots.length;
+				for (int i =0; i < size; i++) {
+					if (loots[i] != null) g.drawImage(img, ((8+i)*w/16), 1*h/36, 2*w/36, 2*w/36, null); 
+				}
 				
 				g.dispose();
 			} while (bs.contentsRestored());
