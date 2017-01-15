@@ -8,12 +8,14 @@ public class Player extends Character implements Updatable{
 	// static fields
 	
 	// dynamic fields	
+	private Camera camera;
 	private Lootable tabItems[];
 	private int itemsMax;
 	
 // Constructors -----------------------------------------------------------------
 	public Player(int posX, int posY, int length, int width, int life, int force, int itemsMax) {
 		super(posX, posY, length, width, life, force);
+		this.camera = new Camera(this);
 		this.itemsMax = itemsMax;
 		this.tabItems = new Lootable[itemsMax];
 	}
@@ -134,8 +136,6 @@ public class Player extends Character implements Updatable{
 	public boolean collision(Bloc b){
 		boolean res = super.collision(b);
 		if (res){
-			System.out.println(life + " " + force);
-			printInventory();
 			if(b instanceof Cook){
 				Cook c = (Cook) b;
 				
@@ -159,9 +159,6 @@ public class Player extends Character implements Updatable{
 					m.havebeenvisited();
 				}
 			}
-			
-			System.out.println(life + " " + force);
-			printInventory();
 		}
 		return res;
 	}

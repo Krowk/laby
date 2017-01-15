@@ -227,7 +227,7 @@ public class Collision {
 			if (e instanceof Bloc && e != a){
 				d = distance(a, e);
 				Bloc b = (Bloc) e; 
-				if( d <= b.getLongest() + a.getLongest()){
+				if( d <= Math.sqrt(Math.pow((b.getLength() + b.getWidth()),2)) ){
 					bool = true;	
 				}
 				if(bool){

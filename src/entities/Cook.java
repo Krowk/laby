@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Cook extends Character implements Updatable{
 // Fields------------------------------------------------------------------------
 	
-	private int nombreFoodsMax;
+	private int nombreFoodsMax = 5;
 	private int nombreFoods;
 	private Food food;
 	private int counter = 0;
 	
 // Constructors -----------------------------------------------------------------
-	public Cook(int posX, int posY, int length, int width, int life, int force, int nombreFoods, int nombreFoodsMax, Food food) {
+	public Cook(int posX, int posY, int length, int width, int life, int force, int nombreFoods, Food food) {
 		super(posX, posY, length, width, life, force);
 		this.nombreFoods = nombreFoods;
 		this.nombreFoodsMax = nombreFoodsMax;

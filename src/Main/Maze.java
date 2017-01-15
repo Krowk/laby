@@ -146,7 +146,7 @@ public class Maze {
 							maze.addEntityToMaze(new Player(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), buff.get(6)));
 							break;
 						case "cook":
-							maze.addEntityToMaze(new Cook(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5),0, buff.get(6), null));
+							maze.addEntityToMaze(new Cook(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5),0, null));
 							break;
 						case "medic":
 							maze.addEntityToMaze(new Medic(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));

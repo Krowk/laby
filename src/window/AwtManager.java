@@ -9,6 +9,7 @@ import com.sun.javafx.scene.input.KeyCodeMap;
 
 import Main.Maze;
 import entities.Bloc;
+import entities.Camera;
 import entities.Entity;
 import entities.Player;
 import entities.Character;
@@ -45,11 +46,11 @@ public class AwtManager {
 		
 		
 		canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(600, 650));
+		canvas.setPreferredSize(new Dimension(800, 450));
 		frame.add(canvas);
 		canvas.setFocusable(false);
 		
-		frame.setLocation(600, 50);
+		frame.setLocation(0, 0);
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEnvent){
 				System.exit(0);
@@ -103,26 +104,40 @@ public class AwtManager {
 			do{
 				ArrayList<Entity> content = maze.getMazeContent();
 				Graphics2D g = (Graphics2D) bs.getDrawGraphics();
+				Camera c = Camera.getCamera();
 				// #antialiasing #ezpz
 				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				
 				g.setColor(Color.WHITE);
 				g.fillRect(0, 0, getWidth(), getHeight());
 				
 				g.setColor(Color.BLACK);
-				g.drawString("TPS: " +String.valueOf((int)TPS), 0, 20);
-				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 100);
+				//resizing
+				if (c != null){
+					g.scale(frame.getWidth()/c.getWidth(), frame.getHeight()/c.getHeight());
+					g.translate(-c.getX()+(c.getWidth()/2),- c.getY()+(c.getHeight()/2));
+					g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
+				}
 				
 				for (Entity prout : content) {
 					Bloc b = (Bloc) prout;
 					double radian = b.getAngle().getRadian();
 					g.rotate(radian, b.getPosX(), b.getPosY());
-					g.setColor(Color.black);						
+					if ( b instanceof Player) g.setColor(Color.RED);
+					else g.setColor(Color.BLACK);						
 					g.fill(new Rectangle(b.getPosX(), b.getPosY(), b.getLength(), b.getWidth()));
 					g.rotate(-radian, b.getPosX(), b.getPosY());
 					
 				}
-				
+				//un-resizing
+				if (c != null){
+					
+					
+					//g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
+					g.translate(+c.getX()-(c.getWidth()/2),+ c.getY()-(c.getHeight()/2));
+					g.scale(((double)c.getWidth()/frame.getWidth()), ((double)c.getHeight()/frame.getHeight()));
+				}
+				g.drawString("TPS: " +String.valueOf((int)TPS), 0, 20);
+				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 100);
 				
 				g.dispose();
 			} while (bs.contentsRestored());
