@@ -21,6 +21,7 @@ import entities.Entity;
 import entities.Lootable;
 import entities.Player;
 import entities.Character;
+import entities.Cook;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -40,9 +41,10 @@ public class AwtManager {
 	 * the thing that does magic 
 	 */
 	private BufferStrategy bs;
-	private BufferedImage img;
+	private ImagesManager im;
 	private ArrayList<Integer> keys = new ArrayList<Integer>();
 	private ArrayList<Integer> thing = new ArrayList<Integer>();
+	private ArrayList<Integer> actions = new ArrayList<Integer>();
 
 	
 // Constructors -----------------------------------------------
@@ -50,18 +52,13 @@ public class AwtManager {
 	 * create an AwtManager, which open a window and set it up
 	 */
 	public AwtManager(){
-		try {
-			img = ImageIO.read(new File("src/Food1.png"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		im = new ImagesManager();
 		frame = new Frame("Game");
 		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(800, 450));
 		frame.add(canvas);
-		canvas.setFocusable(false);
+		canvas.setFocusable(true);
 		
 		frame.setLocation(0, 0);
 		frame.addWindowListener(new WindowAdapter() {
@@ -72,7 +69,7 @@ public class AwtManager {
 		
 		
 		
-		frame.addKeyListener(new KeyListener() {
+		canvas.addKeyListener(new KeyListener() {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -92,8 +89,28 @@ public class AwtManager {
 				thing.add(1);
 			}
 		});
+		
+		canvas.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				System.out.println("test");
+				int x = e.getPoint().x;
+				int y = e.getPoint().y;
+				int w = frame.getWidth();
+				int h = frame.getHeight();
+				for (int i = 0; i < 4; i++) {
+					if (x >((8+i)*w/16)  &&  x <((8+i)*w/16 + 2*w/36)){
+						if (y > 1*h/36 && y < 1*h/36 + 2*w/36){
+							actions.add(i);
+						}
+					}	
+				}
+			}
+		
+		}	
+		);
 		frame.setFocusable(true);
 		frame.getFocusTraversalKeysEnabled();
+		
 		
 		frame.setVisible(true);
 		frame.pack();		
@@ -138,11 +155,13 @@ public class AwtManager {
 					Bloc b = (Bloc) prout;
 					double radian = b.getAngle().getRadian();
 					g.rotate(radian, b.getPosX(), b.getPosY());
+					if (b instanceof Cook) g.drawImage(im.getImage("Cook"),b.getPosX(), b.getPosY(), b.getLength(), b.getWidth(),null);
+					else{
 					if ( b instanceof Player) g.setColor(Color.RED);
 					else g.setColor(Color.BLACK);						
 					g.fill(new Rectangle(b.getPosX(), b.getPosY(), b.getLength(), b.getWidth()));
 					g.rotate(-radian, b.getPosX(), b.getPosY());
-					
+					}
 				}
 				//un-resizing
 				if (c != null){
@@ -174,7 +193,7 @@ public class AwtManager {
 				Lootable[] loots = p.getInventory();
 				int size = loots.length;
 				for (int i =0; i < size; i++) {
-					if (loots[i] != null) g.drawImage(img, ((8+i)*w/16), 1*h/36, 2*w/36, 2*w/36, null); 
+					if (loots[i] != null) g.drawImage(im.getImage("Food1"), ((8+i)*w/16), 1*h/36, 2*w/36, 2*w/36, null); 
 				}
 				
 				g.dispose();
@@ -183,7 +202,6 @@ public class AwtManager {
 		} while (bs.contentsLost());
 	}
 
-	
 	
 // Static methods ---------------------------------------------
 	
@@ -208,17 +226,26 @@ public class AwtManager {
 	 * get the Keys and delete it
 	 * @return an arraylist of the keys stroked
 	 */
-	public ArrayList<ArrayList<Integer>> getKeys(){
+	public ArrayList<ArrayList<Integer>> getKeyEvents(){
 		ArrayList<Integer> a = (ArrayList<Integer>) keys.clone();
 		ArrayList<Integer> b = (ArrayList<Integer>) thing.clone();
-		ArrayList<ArrayList<Integer>> key = new ArrayList<>();
-		key.add(a);
-		key.add(b);
+		
+		ArrayList<ArrayList<Integer>> events = new ArrayList<>();
+		events.add(a);
+		events.add(b);
 		
 		keys.clear();
 		thing.clear();
-		return key;
+		
+		return events;
 	}
+	
+	public ArrayList<Integer> getMouseEvents(){
+		ArrayList<Integer>  res = (ArrayList<Integer>) actions.clone();
+		actions.clear();
+		return res;
+	}
+	
 // Setters ----------------------------------------------------
 	
 }

@@ -1,4 +1,5 @@
 package entities;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -60,19 +61,28 @@ public class Player extends Character implements Updatable{
 				tabItems[i]=null;
 			}
 		}
-		
-		
 	}
 
-	public void update(){
-		ArrayList<Integer>keys = Main.getKeys().get(0);
-		ArrayList<Integer>thing = Main.getKeys().get(1);
-		int size = keys.size();
-		int a = 2; 
-		if (size > 0){
-			a=thing.get(0);	
+	
+	public void useInventory(int n){
+		if (tabItems[n] != null){
+			Lootable l =tabItems[n];			
+			if (l instanceof Food){
+				Food f = (Food) l;
+				eat(f);
+			}
+			tabItems[n] = null;
 		}
-		for (int i = 0; i < size; i++) {
+	}
+	
+	
+	public void update(){
+		ArrayList<Integer>keys = Main.getKeyEvents().get(0);
+		ArrayList<Integer>thing = Main.getKeyEvents().get(1);
+		ArrayList<Integer> mouse = Main.getMouseEvents();
+		int keySize = keys.size();
+		
+		for (int i = 0; i < keySize; i++) {
 			switch (keys.get(i)) {
 			case KeyEvent.VK_Z:
 				if (thing.get(i) == 1){
@@ -110,8 +120,13 @@ public class Player extends Character implements Updatable{
 				break;
 			}
 		}
+		
+		for (int i : mouse) {
+			useInventory(i);
+		}
+		
 		counterForce++;
-		if (counterForce> 128*10){
+		if (counterForce> 128*3){
 			loseForce(1);
 			counterForce = 0;
 		}

@@ -1,5 +1,6 @@
 package Main;
 
+
 import java.util.ArrayList;
 
 import entities.Bloc;
@@ -15,6 +16,7 @@ public class Main {
 	private static int FrameRate	= 1000000000 / FPS_target;
 	private static int TickRate		= 1000000000 / TPS_target;
 	private static ArrayList<ArrayList<Integer>> keys;
+	private static ArrayList<Integer> mouse;
 	
 	public static void main(String[] args) {
 		AwtManager awtManager = new AwtManager();
@@ -75,7 +77,8 @@ public class Main {
 					////////////////////////
 					
 					updatables = maze.getUpdatable();
-					keys = awtManager.getKeys();
+					keys = awtManager.getKeyEvents();
+					mouse = awtManager.getMouseEvents();
 					for (Updatable u : updatables) {
 						u.update();
 					}
@@ -111,8 +114,11 @@ public class Main {
 		}
 	}
 	
-	public static ArrayList<ArrayList<Integer>> getKeys(){
+	public static ArrayList<ArrayList<Integer>> getKeyEvents(){
 		return keys;
 	}
 
+	public static ArrayList<Integer> getMouseEvents(){
+		return mouse;
+	}
 }
