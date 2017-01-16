@@ -177,6 +177,11 @@ public class Player extends Character implements Updatable{
 					m.havebeenvisited();
 				}
 			}
+			
+			else if (b instanceof Safe){
+				Safe s = (Safe) b;
+				// A FINIR (fin du jeu)
+			}
 		}
 		return res;
 	}
