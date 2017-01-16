@@ -201,9 +201,6 @@ public class Character extends Bloc {
 	public int getForce(){return force;}
 	public int getForceMax(){return forceMax;}
 	
-	public String getType(){
-		return this.type;
-	}
 	
 
 // Setters ---------------------------------------------------------------------

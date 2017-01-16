@@ -3,16 +3,7 @@ package window;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
-import com.sun.javafx.scene.input.KeyCodeMap;
 
 import Main.Maze;
 import entities.Bloc;
@@ -20,9 +11,9 @@ import entities.Camera;
 import entities.Entity;
 import entities.Lootable;
 import entities.Player;
-import entities.Character;
+
 import entities.Cook;
-import javafx.scene.input.KeyCode;
+
 
 /**
  * Take care of all the 2Ds stuff
@@ -92,7 +83,7 @@ public class AwtManager {
 		
 		canvas.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
-				System.out.println("test");
+				
 				int x = e.getPoint().x;
 				int y = e.getPoint().y;
 				int w = frame.getWidth();
@@ -148,7 +139,7 @@ public class AwtManager {
 				if (c != null){
 					g.scale(w/c.getWidth(), h/c.getHeight());
 					g.translate(-c.getX()+(c.getWidth()/2),- c.getY()+(c.getHeight()/2));
-					g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
+					//g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
 				}
 				
 				for (Entity prout : content) {
