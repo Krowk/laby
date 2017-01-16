@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import Main.Maze;
 import entities.Bloc;
+import entities.Door;
 import entities.Entity;
 import entities.Line;
+import entities.Wall;
 
 
 public class Collision {
@@ -232,6 +234,14 @@ public class Collision {
 				}
 				if(bool){
 					if(a.collision(b)){
+						
+						if (b instanceof Wall){
+							Wall w = (Wall) b;
+							Door door =w.getdoor();
+							a.collision(door);
+								
+							
+						}
 						return true;
 					}
 					else bool = false;

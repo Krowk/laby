@@ -13,6 +13,7 @@ import entities.Lootable;
 import entities.Player;
 
 import entities.Cook;
+import entities.Door;
 
 
 /**
@@ -148,7 +149,8 @@ public class AwtManager {
 					g.rotate(radian, b.getPosX(), b.getPosY());
 					if (b instanceof Cook) g.drawImage(im.getImage("Cook"),b.getPosX(), b.getPosY(), b.getLength(), b.getWidth(),null);
 					else{
-					if ( b instanceof Player) g.setColor(Color.RED);
+					if (b instanceof Player) g.setColor(Color.RED);
+					if (b instanceof Door) g.setColor(new Color(195,143,38));
 					else g.setColor(Color.BLACK);						
 					g.fill(new Rectangle(b.getPosX(), b.getPosY(), b.getLength(), b.getWidth()));
 					g.rotate(-radian, b.getPosX(), b.getPosY());

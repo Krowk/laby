@@ -13,6 +13,7 @@ public class Wall extends Bloc{
 	 * The identificator of the wall
 	 */
 	private int id; //°
+	private Door door;
 	/**
 	 * The list of all the wall
 	 */
@@ -51,6 +52,7 @@ public class Wall extends Bloc{
 		walls.add(this);
 	}
 	
+	
 // Dynamic methods --------------------------------------------
 	/**
 	 * print in console the fields of the wall
@@ -78,5 +80,11 @@ public class Wall extends Bloc{
 	 */
 	public int getId(){ return this.id;}
 	
+	public Door getdoor(){
+		return door;
+	}
 // setters ----------------------------------------------------
+	public void setDoor(Door d){
+		this.door = d;
+	}
 }

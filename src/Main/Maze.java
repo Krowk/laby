@@ -141,6 +141,9 @@ public class Maze {
 						case "wall":
 							maze.addEntityToMaze(new Wall(buff.get(0),buff.get(1),buff.get(2),buff.get(3),buff.get(4)));
 							break;
+						case "door":
+							maze.addEntityToMaze(Door.createDoor(buff.get(0),buff.get(1),buff.get(2),false));
+							break;
 						case "character":
 							maze.addEntityToMaze(new entities.Character(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
 							break;
