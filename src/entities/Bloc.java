@@ -111,8 +111,8 @@ public abstract class Bloc extends Entity{
 		}
 	}
 
-	public int[] getCollisionArea(){
-		int[] res = new int[4];
+	public double[] getCollisionArea(){
+		double[] res = new double[4];
 		int x;
 		if (width >= length)  x = width;
 		else x = length;

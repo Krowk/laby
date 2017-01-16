@@ -193,13 +193,6 @@ public class Player extends Character implements Updatable{
 // Static methods ---------------------------------------------------------------	
 	
 // Getters ----------------------------------------------------------------------	
-	public int getposX(){
-		return this.posX;
-	}
-	
-	public int getposY(){
-		return this.posY;
-	}
 	
 	public Lootable[] getInventory(){
 		return tabItems;
