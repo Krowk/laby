@@ -19,11 +19,11 @@ public class Camera {
 		return height;
 	}
 	
-	public double getX(){
-		return player.getPosX();
+	public int getX(){
+		return player.getposX();
 	}
-	public double getY(){
-		return player.getPosY();
+	public int getY(){
+		return player.getposY();
 	}
 	public static Camera getCamera(){
 		return camera;

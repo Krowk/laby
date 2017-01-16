@@ -23,7 +23,7 @@ public class Door  extends Bloc{
 	 * @param needKey : true if the Door need a key to be opened : boolean 
 	 */
 	public Door(Wall wall, int position, int length, boolean open) {
-		super((int)wall.getPosX()+(int)Math.cos(wall.angle.getRadian())*position, (int)wall.getPosY()+(int)Math.sin(wall.angle.getRadian())*position, length, wall.width,wall.angle, true);
+		super(wall.getPosX()+(int)Math.cos(wall.angle.getRadian())*position, wall.getPosY()+(int)Math.sin(wall.angle.getRadian())*position, length, wall.width,wall.angle, true);
 		this.id = doors.size();
 		this.wall = wall;
 		wall.setDoor(this);

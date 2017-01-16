@@ -12,21 +12,14 @@ public class Monster extends Character implements Updatable{
 	
 	public void IA(){
 		Player p = Player.getPlayer();
-		double x = p.getPosX();
-		double y = p.getPosY();
-		int a = (int)Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2));
-		if ( Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2)) < 30){
-			setSpeedX(-Math.signum(posX - x) * 0.05);
-			setSpeedY(-Math.signum(posY - y) * 0.05);
-		}
-		else{
+		int x = p.getposX();
+		int y = p.getposY();
+		if (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) < 30){
 			setSpeedX(0);
-			setSpeedY(0);
 		}
 	}
 	
 	public void update(){
-		IA();
 		super.update();
 	}
 	

@@ -1,6 +1,6 @@
 package entities;
 
-
+import java.util.ArrayList;
 
 public class Medic extends Character implements Updatable{
 // Fields------------------------------------------------------------------------
@@ -22,7 +22,13 @@ public class Medic extends Character implements Updatable{
 // Static methods ---------------------------------------------------------------	
 	
 // Getters ----------------------------------------------------------------------	
-
+	public int getposX(){
+		return this.posX;
+	}
+	
+	public int getposY(){
+		return this.posY;
+	}
 	
 	public int getVisite(){
 		return this.visite;

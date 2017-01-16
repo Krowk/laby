@@ -36,7 +36,7 @@ public class Collision {
 	 */
 	public static boolean lineEntity(Line a, Entity b) {
 		int angle = a.getAngle().getDegree();
-		double x, y;
+		int x, y;
 		boolean exept1 = false, exept2 = false;
 		if (angle == 90 || angle == 270) {
 			x = b.getPosX();
@@ -82,14 +82,14 @@ public class Collision {
 		String t1, t2 , t3, t4;
 		
 		
-		double a1x = a.getPosX(), a1y = a.getPosY(), b1x = b.getPosX(), b1y = b.getPosY();
+		int a1x = a.getPosX(), a1y = a.getPosY(), b1x = b.getPosX(), b1y = b.getPosY();
 		int a2x =(int)(a1x + Math.cos(a.getAngle().getRadian()) * a.getLength());
 		int a2y =(int)(a1y + Math.sin(a.getAngle().getRadian()) * a.getLength());
 		int b2x =(int)(b1x + Math.cos(b.getAngle().getRadian()) * a.getLength());
 		int b2y =(int)(b1y + Math.sin(b.getAngle().getRadian()) * a.getLength());
 		
 		if (b.getAngle().getDegree() != 0 && b.getAngle().getDegree() != 180){
-			double b3y	= a1y;
+			int b3y	= a1y;
 			double n	=  (b3y - b1y) / Math.sin(b.getAngle().getRadian());
 			int b3x	= (int)( b1x + Math.cos(b.getAngle().getRadian()) * n);	
 			if (a1x > b3x) { t1 = "sup";}
@@ -105,7 +105,7 @@ public class Collision {
 			else { t2 = "equal";}
 		}
 		else{
-			double b3x	= a1x;
+			int b3x	= a1x;
 			double n	=  (b3x - b1x) / Math.cos(b.getAngle().getRadian());
 			int b3y	= (int)( b1y + Math.sin(b.getAngle().getRadian()) * n);	
 			if (a1y > b3y) { t1 = "sup";}
@@ -122,7 +122,7 @@ public class Collision {
 		}
 		
 		if (a.getAngle().getDegree() != 0 && a.getAngle().getDegree() != 180){
-			double a3y	= b1y;
+			int a3y	= b1y;
 			double n	=  (a3y - a1y) / Math.sin(a.getAngle().getRadian());
 			int a3x	= (int)( a1x + Math.cos(a.getAngle().getRadian()) * n);	
 			if (b1x > a3x) { t3 = "sup";}
@@ -138,7 +138,7 @@ public class Collision {
 			else { t4 = "equal";}
 		}
 		else{
-			double a3x	= b1x;
+			int a3x	= b1x;
 			double n	=  (a3x - a1x) / Math.cos(a.getAngle().getRadian());
 			int a3y	= (int)( a1y + Math.sin(a.getAngle().getRadian()) * n);	
 			if (b1y > a3y) { t3 = "sup";}

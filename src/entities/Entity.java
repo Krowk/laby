@@ -15,11 +15,11 @@ public abstract class Entity {
 	/**
 	 * The x coordinate of the Entity
 	 */
-	protected double posX;
+	protected int posX;
 	/**
 	 * The y coordinate of the Entity
 	 */
-	protected double posY;
+	protected int posY;
 	protected double speedX;
 	protected double speedY;
 	protected double speedMax = 1;
@@ -91,13 +91,13 @@ public abstract class Entity {
 	 * Get the x coordinate of the Entity
 	 * @return
 	 */
-	public double getPosX(){ return this.posX;}
+	public int getPosX(){ return this.posX;}
 
 	/**
 	 * Get the y coordinate of the Entity
 	 * @return
 	 */
-	public double getPosY(){ return this.posY;}
+	public int getPosY(){ return this.posY;}
 
 	
 // Setters ----------------------------------------------------
