@@ -178,8 +178,14 @@ public class Player extends Character implements Updatable{
 				}
 			}
 			
-			if(b instanceof Door){
+
+			else if(b instanceof Door){
 				//voilà
+			}
+			else if (b instanceof Safe){
+				Safe s = (Safe) b;
+				// A FINIR (fin du jeu)
+
 			}
 		}
 		return res;
