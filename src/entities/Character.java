@@ -1,6 +1,7 @@
 package entities;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import Main.Main;
@@ -201,7 +202,9 @@ public class Character extends Bloc {
 	public int getForce(){return force;}
 	public int getForceMax(){return forceMax;}
 	
-	
+	public static HashMap<Integer, Character> getCharacters(){
+		return characters;
+	}
 
 // Setters ---------------------------------------------------------------------
 

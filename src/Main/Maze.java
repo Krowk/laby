@@ -2,10 +2,10 @@ package Main;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.sun.media.jfxmedia.MediaException;
+import java.util.HashMap;
 
 import entities.*;
+import entities.Character;
 
 import java.io.BufferedReader;
 
@@ -27,6 +27,7 @@ public class Maze {
 	 * The list of all the mazes 
 	 */
 	public static ArrayList<Maze> mazes = new ArrayList<Maze>();
+	public static HashMap<Integer, Character> characters;
 	public static Maze activeMaze;
 	
 // Constructors -----------------------------------------------
@@ -166,6 +167,7 @@ public class Maze {
 					
 			}
 			c.close();
+			maze.setCharacters(Character.getCharacters());
 			return maze;
 		} catch (IOException e) {
 			System.out.println("erreur de lecture de fichier "+ fileName);
@@ -187,8 +189,15 @@ public class Maze {
 	public ArrayList<Entity> getMazeContent(){
 		return maze;
 	}
+	
+	public HashMap<Integer, Character> getCharacters(){
+		return characters;
+	}
 
 	public int getWidth(){ return this.width; }
 	public int getLength(){ return this.length;}
 // Setters -----------------------------------------------------
+	public void setCharacters(HashMap<Integer, Character> characters){
+		this.characters = characters;
+	}
 }

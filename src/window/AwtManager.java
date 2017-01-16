@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import Main.Maze;
 import entities.Bloc;
@@ -12,6 +16,7 @@ import entities.Entity;
 import entities.Lootable;
 import entities.Monster;
 import entities.Player;
+import entities.Character;
 
 import entities.Cook;
 import entities.Door;
@@ -148,15 +153,16 @@ public class AwtManager {
 					Bloc b = (Bloc) prout;
 					double radian = b.getAngle().getRadian();
 					g.rotate(radian, b.getPosX(), b.getPosY());
+					g.setColor(Color.BLACK);
 					if (b instanceof Cook) g.drawImage(im.getImage("Cook"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
-					if (b instanceof Monster) g.drawImage(im.getImage("Monster"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
+					else if (b instanceof Monster) g.drawImage(im.getImage("Monster"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
 					else{
-					if (b instanceof Player) g.setColor(Color.RED);
-					if (b instanceof Door) g.setColor(new Color(195,143,38));
-					else g.setColor(Color.BLACK);						
-					g.fill(new Rectangle((int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth()));
-					g.rotate(-radian, b.getPosX(), b.getPosY());
+						if (b instanceof Player) g.setColor(Color.RED);
+						if (b instanceof Door) g.setColor(new Color(195,143,38));
+						g.fill(new Rectangle((int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth()));
 					}
+					g.rotate(-radian, b.getPosX(), b.getPosY());
+				
 				}
 				//un-resizing
 				if (c != null){
@@ -165,6 +171,22 @@ public class AwtManager {
 					//g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
 					g.translate(+c.getX()-(c.getWidth()/2),+ c.getY()-(c.getHeight()/2));
 					g.scale(((double)c.getWidth()/w), ((double)c.getHeight()/h));
+				}
+				
+				HashMap<Integer, Character>  characters= maze.getCharacters();
+				for (Map.Entry<Integer, Character> entry : characters.entrySet()) {					
+					Character character = entry.getValue();
+					if ( character.getLife() < character.getLifeMax()){
+						double l =(double)  character.getLife()/character.getLifeMax();
+						g.setColor(Color.BLACK);
+						int r = (int)(character.getPosX() * (double)w/c.getWidth());
+						int t = (int)((character.getPosY()+character.getLongest()) * h/c.getHeight());
+						int u =((2*w/16));
+						int i = ((w/36));
+						g.drawRect((int)((character.getPosX() - c.getX()) * w/c.getWidth() +(w/2))+1 ,(int)((character.getPosY() - c.getY())* h/c.getHeight()+(h/2))-10, ((2*w/16)), ((w/36)));
+						g.setColor(Color.PINK);
+						g.fillRect((int)((character.getPosX() - c.getX()) * w/c.getWidth() +(w/2))+1,(int)((character.getPosY() - c.getY())* h/c.getHeight()+(h/2))-10 ,((int) ((double)(2*w/16)*l))-1, ((w/36)));
+					}
 				}
 				
 				// HUD
