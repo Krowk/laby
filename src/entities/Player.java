@@ -180,7 +180,19 @@ public class Player extends Character implements Updatable{
 			
 
 			else if(b instanceof Door){
-				//voilà
+				
+				
+				if(Math.abs(b.getPosY()) < Math.abs(this.posY)){
+					this.posY=b.getPosY()-Math.abs(b.width)-Math.abs(this.length);
+				}
+				else if(Math.abs(b.getPosY()) > Math.abs(this.posY)){
+					this.posY=b.getPosY()+Math.abs(this.length);
+				}
+				
+				
+				
+				
+				
 			}
 			else if (b instanceof Safe){
 				Safe s = (Safe) b;
