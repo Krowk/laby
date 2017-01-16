@@ -183,9 +183,9 @@ public class AwtManager {
 						int t = (int)((character.getPosY()+character.getLongest()) * h/c.getHeight());
 						int u =((2*w/16));
 						int i = ((w/36));
-						g.drawRect((int)((character.getPosX() - c.getX()) * w/c.getWidth() +(w/2))+1 ,(int)((character.getPosY() - c.getY())* h/c.getHeight()+(h/2))-10, ((2*w/16)), ((w/36)));
+						g.drawRect((int)((character.getPosX() - c.getX()) * w/c.getWidth() +(w/2))+1 ,(int)((character.getPosY() - c.getY())* h/c.getHeight()+(h/2))-25, ((2*w/16)), ((w/36)));
 						g.setColor(Color.PINK);
-						g.fillRect((int)((character.getPosX() - c.getX()) * w/c.getWidth() +(w/2))+1,(int)((character.getPosY() - c.getY())* h/c.getHeight()+(h/2))-10 ,((int) ((double)(2*w/16)*l))-1, ((w/36)));
+						g.fillRect((int)((character.getPosX() - c.getX()) * w/c.getWidth() +(w/2))+1,(int)((character.getPosY() - c.getY())* h/c.getHeight()+(h/2))-25 ,((int) ((double)(2*w/16)*l))-1, ((w/36)));
 					}
 				}
 				
