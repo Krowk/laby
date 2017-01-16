@@ -4,14 +4,13 @@ import java.util.ArrayList;
 /**
  * A door is an object linked to a wall, its position depends of the wall suporting it
  */
-public class Door {
+public class Door  extends Bloc{
 	// Fields
 	private int id;
-	private int wallId;
+	private Wall wall;
 	private int position;
 	private int length;
 	private boolean open;
-	private boolean needKey;
 	public static ArrayList<Door> doors = new ArrayList<Door>();
 	
 	// Constructors
@@ -23,13 +22,15 @@ public class Door {
 	 * @param open : the state of the Door: boolean
 	 * @param needKey : true if the Door need a key to be opened : boolean 
 	 */
-	public Door(int wallId, int position, int length, boolean open, boolean needKey) {
+	public Door(Wall wall, int position, int length, boolean open) {
+		super(wall.getPosX()+(int)Math.cos(wall.angle.getRadian())*position, wall.getPosY()+(int)Math.sin(wall.angle.getRadian())*position, length, wall.width,wall.angle, true);
 		this.id = doors.size();
-		this.wallId = wallId;
+		this.wall = wall;
+		wall.setDoor(this);
 		this.position = position;
 		this.length = length;
 		this.open = open;
-		this.needKey = needKey;
+		
 		doors.add(this);
 	}
 	
@@ -37,6 +38,12 @@ public class Door {
 	// dynamic methods
 	
 	// static methods
+	
+	public static Door createDoor(int wallid, int position, int length, boolean open){
+		Wall wall = Wall.getWallFromId(wallid);
+		return new Door(wall, position, length, open);
+		
+	}
 	
 	// getters
 	

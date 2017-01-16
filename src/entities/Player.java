@@ -1,5 +1,4 @@
 package entities;
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -7,7 +6,7 @@ import Main.Main;
 public class Player extends Character implements Updatable{
 // Fields------------------------------------------------------------------------
 	// static fields
-	
+	private static Player player;
 	// dynamic fields	
 	private Camera camera;
 	private Lootable[] tabItems;
@@ -20,6 +19,7 @@ public class Player extends Character implements Updatable{
 		this.camera = new Camera(this);
 		this.itemsMax = itemsMax;
 		this.tabItems = new Lootable[itemsMax];
+		player = this;
 	}
 	
 // Dynamic methods --------------------------------------------------------------	
@@ -177,6 +177,10 @@ public class Player extends Character implements Updatable{
 					m.havebeenvisited();
 				}
 			}
+			
+			if(b instanceof Door){
+				//voilà
+			}
 		}
 		return res;
 	}
@@ -195,6 +199,8 @@ public class Player extends Character implements Updatable{
 		return tabItems;
 	}
 	
-	
+	public static Player getPlayer(){
+		return player;
+	}
 // Setters ----------------------------------------------------------------------
 }

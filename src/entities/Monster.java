@@ -14,6 +14,8 @@ public class Monster extends Character implements Updatable{
 		Player p = Player.getPlayer();
 		int x = p.getposX();
 		int y = p.getposY();
+		if (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) < 30){
+			setSpeedX(0);
 		}
 	}
 	
