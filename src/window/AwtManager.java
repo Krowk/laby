@@ -10,6 +10,7 @@ import entities.Bloc;
 import entities.Camera;
 import entities.Entity;
 import entities.Lootable;
+import entities.Monster;
 import entities.Player;
 
 import entities.Cook;
@@ -147,12 +148,13 @@ public class AwtManager {
 					Bloc b = (Bloc) prout;
 					double radian = b.getAngle().getRadian();
 					g.rotate(radian, b.getPosX(), b.getPosY());
-					if (b instanceof Cook) g.drawImage(im.getImage("Cook"),b.getPosX(), b.getPosY(), b.getLength(), b.getWidth(),null);
+					if (b instanceof Cook) g.drawImage(im.getImage("Cook"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
+					if (b instanceof Monster) g.drawImage(im.getImage("Monster"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
 					else{
 					if (b instanceof Player) g.setColor(Color.RED);
 					if (b instanceof Door) g.setColor(new Color(195,143,38));
 					else g.setColor(Color.BLACK);						
-					g.fill(new Rectangle(b.getPosX(), b.getPosY(), b.getLength(), b.getWidth()));
+					g.fill(new Rectangle((int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth()));
 					g.rotate(-radian, b.getPosX(), b.getPosY());
 					}
 				}
