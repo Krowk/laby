@@ -182,12 +182,24 @@ public class Player extends Character implements Updatable{
 			else if(b instanceof Door){
 				
 				
-				if(Math.abs(b.getPosY()) < Math.abs(this.posY)){
-					this.posY=b.getPosY()-Math.abs(b.width)-Math.abs(this.length);
+				if(b.length<b.width){
+					if (Math.abs(b.getPosX())<Math.abs(this.posX)){
+						this.posX = this.posX-b.length-this.length;
+					}
+					
+					else if (Math.abs(b.getPosX())>Math.abs(this.posX)){
+						this.posX = this.posX+b.length+this.length;
+					}
 				}
-				else if(Math.abs(b.getPosY()) > Math.abs(this.posY)){
-					this.posY=b.getPosY()+Math.abs(this.length);
+				else{
+					if(Math.abs(b.getPosY()) < Math.abs(this.posY)){
+						this.posY=this.posY-Math.abs(b.width)-Math.abs(this.length);
+					}
+					else if(Math.abs(b.getPosY()) > Math.abs(this.posY)){
+						this.posY=this.posY+Math.abs(this.length)+Math.abs(b.width);
+					}
 				}
+				
 				
 				
 				
