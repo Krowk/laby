@@ -10,7 +10,7 @@ public class Door  extends Bloc{
 	private Wall wall;
 	private int position;
 	private int length;
-	private boolean open;
+	protected boolean open;
 	public static ArrayList<Door> doors = new ArrayList<Door>();
 	
 	// Constructors

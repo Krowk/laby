@@ -11,6 +11,7 @@ public class SecretDoor extends Door{
 		super(wall, position, length, open);
 		this.tpPosX = tpPosX;
 		this.tpPosY = tpPosY;
+		this.open = true;
 	}
 
 
