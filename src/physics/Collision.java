@@ -237,8 +237,10 @@ public class Collision {
 						
 						if (b instanceof Wall){
 							Wall w = (Wall) b;
-							Door door =w.getdoor();
-							a.collision(door);
+							if( w.getdoor() != null){
+								Door door =w.getdoor();
+								a.collision(door);								
+							}
 								
 							
 						}
