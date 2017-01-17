@@ -200,12 +200,17 @@ public class Player extends Character implements Updatable{
 					}
 				}
 				
+			}
+			
+			else if (b instanceof SecretDoor){
+				SecretDoor s = (SecretDoor) b;
 				
-				
-				
-				
+				this.posX = ((SecretDoor) b).getTpPosX();
+				this.posY = ((SecretDoor) b).getTpPosY();
 				
 			}
+			
+			
 			else if (b instanceof Safe){
 				Safe s = (Safe) b;
 				// A FINIR (fin du jeu)
