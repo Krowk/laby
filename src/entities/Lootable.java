@@ -6,6 +6,8 @@ public abstract class Lootable extends Entity {
 	
 	private int id;
 	private String name;
+	private int lenght;
+	private int widht;
 
 //Constructor ---------------------------------
 	
@@ -20,10 +22,12 @@ public abstract class Lootable extends Entity {
 	 * @param id
 	 * 			: id of the object
 	 */
-	public Lootable(int posX, int posY, int id, String name, boolean isSolid) {
+	public Lootable(int posX, int posY, int id, String name, boolean isSolid, int lenght, int widht) {
 		super(posX, posY, isSolid);
 		this.id = id;
 		this.name = name;
+		this.lenght = lenght;
+		this.widht = widht;
 	}
 
 	public String getName() {

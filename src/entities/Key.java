@@ -29,8 +29,8 @@ public class Key extends Lootable {
 	 * @param posY
 	 * 			: y position (int)
 	 */
-	public Key(int id, boolean onFloor,int posX, int posY,String name) {
-		super(posX,posY,id,name, false);
+	public Key(int id, boolean onFloor,int posX, int posY,String name,int lenght, int widht) {
+		super(posX,posY,id,name, false, lenght, widht);
 		this.onFloor = onFloor;
 	}
 

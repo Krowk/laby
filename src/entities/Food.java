@@ -36,8 +36,8 @@ public class Food extends Lootable {
 	 * @param id
 	 * 			: id of the food (int)
 	 */
-	public Food(int lifeGain, boolean onFloor, int forceGain,int posX, int posY, int id,String name) {
-		super(posX,posY,id,name, false);
+	public Food(int lifeGain, boolean onFloor, int forceGain,int posX, int posY, int id,int widht, int lenght, String name) {
+		super(posX,posY,id,name, false,lenght,widht);
 		this.lifeGain = lifeGain;
 		this.onFloor = onFloor;
 		this.forceGain = forceGain;

@@ -158,7 +158,7 @@ public class Player extends Character implements Updatable{
 				Cook c = (Cook) b;
 				
 				while(c.getNombreFoods()>0){
-					putInInventory(new Food(10,false,10,0,0,0,"bouf"));
+					putInInventory(new Food(10,false,10,0,0,0,0,0,"bouf"));
 					c.removeFood();
 				}		
 			}
