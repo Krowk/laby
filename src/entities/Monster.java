@@ -3,6 +3,7 @@ package entities;
 public class Monster extends Character implements Updatable{
 // Fields------------------------------------------------------------------------
 	private double speedMax = 0.5;
+	private int counter = 0;
 // Constructors -----------------------------------------------------------------
 	public Monster(int posX, int posY, int length, int width, int life, int force) {
 		super(posX, posY, length, width, life, force);
@@ -14,8 +15,7 @@ public class Monster extends Character implements Updatable{
 		Player p = Player.getPlayer();
 		double x = p.getPosX();
 		double y = p.getPosY();
-		int a = (int)Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2));
-		if ( Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2)) < 30){
+		if (Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2)) < 30 && counter ==0 ){
 			setSpeedX(-Math.signum(posX - x) * speedMax);
 			setSpeedY(-Math.signum(posY - y) * speedMax);
 		}
@@ -27,7 +27,22 @@ public class Monster extends Character implements Updatable{
 	
 	public void update(){
 		IA();
+		if (counter > 0){
+			counter--;
+		}
 		super.update();
+	}
+	
+	public boolean collision(Bloc b){
+		boolean res = super.collision(b);
+		if (res){
+			if(b instanceof Player){
+				Player p = (Player) b;
+				attack(p, this);
+				counter = 128*1;
+			}
+		}
+		return res;
 	}
 	
 // Static methods ---------------------------------------------------------------	

@@ -10,7 +10,7 @@ public class Key extends Lootable {
 	
 //Fields -----------------------------------------------------
 	
-	private boolean onFloor = true;
+	
 	
 	
 // Constructor------------------------------------------------
@@ -29,9 +29,9 @@ public class Key extends Lootable {
 	 * @param posY
 	 * 			: y position (int)
 	 */
-	public Key(int id, boolean onFloor,int posX, int posY,String name,int lenght, int widht) {
-		super(posX,posY,id,name, false, lenght, widht);
-		this.onFloor = onFloor;
+	public Key(int posX, int posY, int widht , int lenght, boolean onFloor,int id) {
+		super(posX, posY, widht, lenght, onFloor, true, id);
+		
 	}
 
 

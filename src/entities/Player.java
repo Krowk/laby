@@ -42,8 +42,10 @@ public class Player extends Character implements Updatable{
 			
 			i++;
 		}
+		x.width=0;
+		x.length=0;
 	}
-	
+	/*
 	public void printInventory(){
 		for (int i = 0; i < tabItems.length; i++) {
 			if(tabItems[i]==null){
@@ -53,7 +55,7 @@ public class Player extends Character implements Updatable{
 			System.out.println("Element "+i+" : "+ tabItems[i].getName());
 			}
 		}
-	}
+	}*/
 	
 	public void deletItem(Lootable x){
 		for (int i = 0; i < tabItems.length; i++) {
@@ -146,8 +148,8 @@ public class Player extends Character implements Updatable{
 	 * 			: f1 is the food (Food)
 	 */
 	public void eat(Food f1){
-		this.life = this.life + f1.getLifeGain();
-		this.force = this.force + f1.getForceGain(); 
+		gainLife(f1.getLifeGain());
+		gainForce(f1.getForceGain()); 
 	}
 
 	
@@ -156,10 +158,12 @@ public class Player extends Character implements Updatable{
 		if (res){
 			if(b instanceof Cook){
 				Cook c = (Cook) b;
-				
+				int i =0;
 				while(c.getNombreFoods()>0){
-					putInInventory(new Food(10,false,10,0,0,0,0,0,"bouf"));
+					
+					putInInventory(new Food(0,0,0,0,50,50,false,i));
 					c.removeFood();
+					i++;
 				}		
 			}
 			
@@ -173,7 +177,7 @@ public class Player extends Character implements Updatable{
 				Medic m = (Medic) b;
 				
 				if(m.getVisite() != 0 ){
-					this.life = life + 50;
+					gainLife(50);
 					m.havebeenvisited();
 				}
 			}
@@ -215,6 +219,11 @@ public class Player extends Character implements Updatable{
 				Safe s = (Safe) b;
 				// A FINIR (fin du jeu)
 
+			}
+			
+			else if (b instanceof Lootable){
+				Lootable l = (Lootable) b;
+				putInInventory(l);
 			}
 		}
 		return res;

@@ -1,13 +1,12 @@
 package entities;
 
-public abstract class Lootable extends Entity {
+public abstract class Lootable extends Bloc {
 	
 // Fields -------------------------------------
 	
+	private boolean onFloor = true;
 	private int id;
-	private String name;
-	private int lenght;
-	private int widht;
+
 
 //Constructor ---------------------------------
 	
@@ -22,23 +21,22 @@ public abstract class Lootable extends Entity {
 	 * @param id
 	 * 			: id of the object
 	 */
-	public Lootable(int posX, int posY, int id, String name, boolean isSolid, int lenght, int widht) {
-		super(posX, posY, isSolid);
+	public Lootable(int posX, int posY, int widht,int lenght,boolean onFloor, boolean isSolid, int id) {
+		super(posX, posY, widht, lenght, 0, isSolid);
+		this.onFloor = onFloor;
 		this.id = id;
-		this.name = name;
-		this.lenght = lenght;
-		this.widht = widht;
 	}
 
-	public String getName() {
-		return name;
-	}
 	
-	public int getId(){
-		return id;
-	}
 	
 	public abstract void use();
+
+
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id;
+	}
 	
 
 }

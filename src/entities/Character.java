@@ -85,6 +85,9 @@ public class Character extends Bloc {
 	 */
 	public void gainLife(int x) {
 		this.life = this.life + x;
+		if (life > lifeMax){
+			life = lifeMax;
+		}
 	}
 	
 	/**
@@ -93,6 +96,9 @@ public class Character extends Bloc {
 	 */
 	public void gainForce(int x) {
 		this.force = this.force + x;
+		if (force > forceMax){
+			force = forceMax;
+		}
 	}
 		
 	/**
@@ -157,21 +163,22 @@ public class Character extends Bloc {
 	 * @param c2: seconde character (Character)
 	 */
 	public static void attack(Character c1, Character c2) {
-		int healthC1 = c1.life;
+		
 		int attackC1 = c1.force;
-		int healthC2 = c2.life;
+		
 		int attackC2 = c2.force;
 		
 
-		int res = (int)( Math.random() * attackC1) - (int)( Math.random() * healthC2);
-		int res2 = (int)( Math.random() * attackC2) - (int)( Math.random() * healthC1);
+		int res = (int)( Math.random() * attackC1);
+		int res2 = (int)( Math.random() * attackC2);
 
-		if (res > 0) {
-			c2.loseLife(res);
+		int damage = Math.abs(res - res2);
+		if (res > res2) {
+			c2.loseLife(damage);
 		}
 
-		if (res2 > 0){
-			c1.loseLife(res2);
+		if (res2 > res){
+			c1.loseLife(damage);
 		}
 
 	}

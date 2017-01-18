@@ -95,7 +95,7 @@ public class AwtManager {
 				int y = e.getPoint().y;
 				int w = frame.getWidth();
 				int h = frame.getHeight();
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i <= 4; i++) {
 					if (x >((8+i)*w/16)  &&  x <((8+i)*w/16 + 2*w/36)){
 						if (y > 1*h/36 && y < 1*h/36 + 2*w/36){
 							actions.add(i);

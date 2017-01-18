@@ -133,7 +133,7 @@ public class Maze {
 				if (currentLine.equals("wall") || currentLine.equals("door") || currentLine.equals("stair")
 						|| currentLine.equals("elevator") || currentLine.equals("key") || currentLine.equals("character")
 						|| currentLine.equals("player") || currentLine.equals("cook") || currentLine.equals("medic")
-						|| currentLine.equals("monster")){
+						|| currentLine.equals("monster") || currentLine.equals("food")){
 					type = currentLine;
 				}
 				else{
@@ -160,6 +160,8 @@ public class Maze {
 						case "monster":
 							maze.addEntityToMaze(new Monster(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
 						break;
+						case "food":
+							maze.addEntityToMaze(new Food(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), true, buff.get(6)));
 						default:
 					}
 					
