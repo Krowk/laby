@@ -184,8 +184,27 @@ public class Player extends Character implements Updatable{
 			
 
 			else if(b instanceof Door){
+				Door d = (Door) b;
+				
+				if(d.angle.getDegree() == 0 && d.posY<posY){
+					posY = this.posY-d.width-this.length;
+				}
+				
+				else if(d.angle.getDegree() == 0 && d.posY>posY){
+					posY = this.posY+d.width+this.length;
+				}
+				
+				else if (b.angle.getDegree() == 90 && b.posX<posX){
+					posX = this.posX+b.width+this.length;
+				}
+				else if (d.angle.getDegree() == 90 && d.posX>posX){
+					System.out.println("bite");
+					posX = d.posX-this.length-d.width;
+				}
 				
 				
+				
+				/*
 				if(b.length<b.width){
 					if (Math.abs(b.getPosX())<Math.abs(this.posX)){
 						this.posX = this.posX-b.length-this.length;
@@ -202,7 +221,7 @@ public class Player extends Character implements Updatable{
 					else if(Math.abs(b.getPosY()) > Math.abs(this.posY)){
 						this.posY=this.posY+Math.abs(this.length)+Math.abs(b.width);
 					}
-				}
+				}*/
 				
 			}
 			
