@@ -1,7 +1,7 @@
 package entities;
 
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import Main.Main;
@@ -117,6 +117,9 @@ public class Character extends Bloc {
 		if(this.life <= 0){
 			characters.remove(this.id);
 			Maze.deleteEntity(this);
+			if (this instanceof Player){
+				Main.state = 1;
+			}
 		}
 		
 	}

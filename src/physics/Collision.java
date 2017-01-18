@@ -224,6 +224,7 @@ public class Collision {
 	public static boolean collision(Bloc a){
 		ArrayList<Entity> maze = Maze.activeMaze.getMazeContent();
 		boolean bool = false;
+		boolean res = false;
 		double d = 0;
 		for (Entity e : maze) {
 			if (e instanceof Bloc && e != a){
@@ -234,23 +235,27 @@ public class Collision {
 				}
 				if(bool){
 					if(a.collision(b)){
-						
 						if (b instanceof Wall){
 							Wall w = (Wall) b;
-							if( w.getdoor() != null){
+							if( w.getdoor() != null ){
 								Door door =w.getdoor();
-								a.collision(door);								
+								if (a.collision(door)){
+									return true;
+								}
 							}
-								
-							
+							return true;
 						}
 						return true;
+						
 					}
-					else bool = false;
+					else{
+						bool = false;
+					}
+					
 				}
 			}
 		}
-		return false;
+		return res;
 	}
 
 	public static double distance(Entity a, Entity b){
@@ -271,8 +276,8 @@ public class Collision {
 		double t1, t2;
 		t1 = Math.cos(rad);
 		t2 = Math.sin(rad);
-		res[0] = (x * t1 - y * t2);
-		res[1] = (x * t2 + y * t1);
+		res[0] = rounding(x * t1 - y * t2);
+		res[1] = rounding(x * t2 + y * t1);
 		return res;
 	}
 
@@ -286,8 +291,8 @@ public class Collision {
 	 */
 	public static double[] rotateCoordinate(double x, double y, double cos, double sin){
 		double[] res = new double[2];
-		res[0] = ( x * cos + y * sin);
-		res[1] = ( -(x * sin) + y * cos);
+		res[0] = rounding( x * cos + y * sin);
+		res[1] = rounding( -(x * sin) + y * cos);
 		return res;
 	}
 	
@@ -303,5 +308,14 @@ public class Collision {
 		return ((int)d);
 	}
 	
+	public static double rounding(double d){
+		if (d + EPSILON > (int)(d+1)){
+			return (int)(d+1);
+		}
+		if (d - EPSILON < (int)(d)){
+			return (int)(d);
+		}
+		return d;
+	}
 	
 }

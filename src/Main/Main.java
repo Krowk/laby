@@ -17,9 +17,27 @@ public class Main {
 	private static int TickRate		= 1000000000 / TPS_target;
 	private static ArrayList<ArrayList<Integer>> keys;
 	private static ArrayList<Integer> mouse;
+	private static AwtManager awtManager;
+	public static int state=0;
+	
 	
 	public static void main(String[] args) {
-		AwtManager awtManager = new AwtManager();
+		awtManager = new AwtManager();
+		while(true){
+			switch (state) {
+			case 0:
+				mainLoop();
+				break;
+			case 1:
+				loose();
+			default:
+				break;
+			}
+			
+		}
+	}
+	
+	public static void mainLoop(){
 		Maze maze = Maze.createMaze("src/test.txt");
 		Maze.activeMaze = maze;
 		
@@ -49,7 +67,7 @@ public class Main {
 				TPS_tab.add(0);
 			}
 			// Main loop ----------------------------------------------
-			while (true){
+			while (state == 0){
 				
 				currentTime = System.nanoTime();
 				elapsedTime1 += currentTime - lastTime;
@@ -73,9 +91,7 @@ public class Main {
 					actualTPS++;
 					TPS_tab.add(actualTPS);
 					TPS_tab.remove(0);
-					//awtManager.blup();
 					////////////////////////
-					
 					updatables = maze.getUpdatable();
 					keys = awtManager.getKeyEvents();
 					mouse = awtManager.getMouseEvents();
@@ -114,6 +130,15 @@ public class Main {
 		}
 	}
 	
+	public static void loose(){
+		awtManager.loose();
+		
+	}
+	
+	public static void win(){
+		
+	}
+	
 	public static ArrayList<ArrayList<Integer>> getKeyEvents(){
 		return keys;
 	}
@@ -121,4 +146,6 @@ public class Main {
 	public static ArrayList<Integer> getMouseEvents(){
 		return mouse;
 	}
+
+	
 }

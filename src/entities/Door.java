@@ -49,5 +49,6 @@ public class Door  extends Bloc{
 	
 	public int getId(){	return this.id;	}
 	
+	public boolean getOpen(){ return open;}
 	// setters
 }

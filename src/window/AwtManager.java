@@ -193,7 +193,8 @@ public class AwtManager {
 				g.setColor(Color.BLACK);
 				g.drawString("TPS: " +String.valueOf((int)TPS), 0, 20);
 				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 40);
-				
+				g.drawString("x: "+c.getX(), 0, 60);
+				g.drawString("y: "+c.getY(), 0, 80);
 				Player p = c.getPlayer();
 				double l =(double)  p.getLife()/p.getLifeMax();
 				g.setColor(Color.RED);
@@ -219,6 +220,23 @@ public class AwtManager {
 		} while (bs.contentsLost());
 	}
 
+	public void loose(){
+		do {
+			do{
+				Graphics2D g = (Graphics2D) bs.getDrawGraphics();
+				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				g.setColor(Color.BLACK);
+				int w = frame.getWidth();
+				int h = frame.getHeight();
+				g.fillRect(0, 0, w, h);
+				g.setColor(Color.WHITE);
+				g.setFont(new Font(g.getFont().getName(), Font.BOLD, 60));
+				g.drawString("YOU DIED", (w/2)-(g.getFontMetrics().stringWidth("YOU DIED")/2), h/2);
+				g.dispose();
+			} while (bs.contentsRestored());
+			bs.show();
+		} while (bs.contentsLost());
+	}
 	
 // Static methods ---------------------------------------------
 	
