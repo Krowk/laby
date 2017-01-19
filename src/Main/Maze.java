@@ -133,7 +133,7 @@ public class Maze {
 				if (currentLine.equals("wall") || currentLine.equals("door") || currentLine.equals("stair")
 						|| currentLine.equals("elevator") || currentLine.equals("key") || currentLine.equals("character")
 						|| currentLine.equals("player") || currentLine.equals("cook") || currentLine.equals("medic")
-						|| currentLine.equals("monster") || currentLine.equals("food")){
+						|| currentLine.equals("monster") || currentLine.equals("food") || currentLine.equals("safe")){
 					type = currentLine;
 				}
 				else{
