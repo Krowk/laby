@@ -292,6 +292,7 @@ public class Collision {
 	public static double[] rotateCoordinate(double x, double y, double cos, double sin){
 		double[] res = new double[2];
 		res[0] = rounding( x * cos + y * sin);
+		double a= -(x * sin) + y * cos;
 		res[1] = rounding( -(x * sin) + y * cos);
 		return res;
 	}
@@ -309,12 +310,23 @@ public class Collision {
 	}
 	
 	public static double rounding(double d){
-		if (d + EPSILON > (int)(d+1)){
-			return (int)(d+1);
+		if (d > 0){
+			if (d +EPSILON > (int)(d+1)){
+				return (int)(d+1);
+			}
+			if (d - EPSILON < (int)(d)){
+				return (int)(d);
+			}			
 		}
-		if (d - EPSILON < (int)(d)){
-			return (int)(d);
+		else if (d <0){
+			if (d +EPSILON > (int)(d)){
+				return (int)(d);
+			}
+			if (d - EPSILON < (int)(d-1)){
+				return (int)(d-1);
+			}
 		}
+		
 		return d;
 	}
 	
