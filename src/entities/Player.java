@@ -195,12 +195,11 @@ public class Player extends Character implements Updatable{
 				}
 				
 
-				else if (b.angle.getDegree() == 90 && b.posX<posX){
-					posX = this.posX+b.width+this.length;
+				else if (b.angle.getDegree() == 270 && b.posX<this.posX){
+					posX = this.posX-b.width-this.length;
 				}
-				else if (d.angle.getDegree() == 90 && d.posX>posX){
-					System.out.println("bite");
-					posX = d.posX-this.length-d.width;
+				else if (d.angle.getDegree() == 270 && d.posX>this.posX){
+					posX = this.posX+this.length+d.width;
 				}
 				
 				

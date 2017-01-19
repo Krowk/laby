@@ -162,6 +162,9 @@ public class Maze {
 						break;
 						case "food":
 							maze.addEntityToMaze(new Food(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), true, buff.get(6)));
+						break;
+						case "safe":
+							maze.addEntityToMaze(new Safe(buff.get(0),buff.get(1),buff.get(2),buff.get(3),buff.get(4), true, false));
 						default:
 					}
 					
