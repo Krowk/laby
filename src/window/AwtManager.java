@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,8 +41,8 @@ public class AwtManager {
 	 */
 	private BufferStrategy bs;
 	private ImagesManager im;
-	private ArrayList<Integer> keys = new ArrayList<Integer>();
-	private ArrayList<Integer> thing = new ArrayList<Integer>();
+	private HashSet<Integer> keys = new HashSet<Integer>();
+	//private ArrayList<Integer> thing = new ArrayList<Integer>();
 	private ArrayList<Integer> actions = new ArrayList<Integer>();
 
 	
@@ -77,15 +78,17 @@ public class AwtManager {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				keys.add(e.getKeyCode());
-				thing.add(0);
+				keys.remove(e.getKeyCode());
+				//thing.add(0);
 			}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				keys.add(e.getKeyCode());
-				thing.add(1);
+				//thing.add(1);
 			}
+			
+			
 		});
 		
 		canvas.addMouseListener(new MouseAdapter(){
@@ -261,18 +264,18 @@ public class AwtManager {
 	 * get the Keys and delete it
 	 * @return an arraylist of the keys stroked
 	 */
-	public ArrayList<ArrayList<Integer>> getKeyEvents(){
-		ArrayList<Integer> a = (ArrayList<Integer>) keys.clone();
-		ArrayList<Integer> b = (ArrayList<Integer>) thing.clone();
+	public HashSet<Integer> getKeyEvents(){
+		//HashSet<Integer> a = (HashSet<Integer>) keys.clone();
+		//ArrayList<Integer> b = (ArrayList<Integer>) thing.clone();
 		
-		ArrayList<ArrayList<Integer>> events = new ArrayList<>();
-		events.add(a);
-		events.add(b);
+		//ArrayList<ArrayList<Integer>> events = new ArrayList<>();
+		//events.add(a);
+		//events.add(b);
 		
-		keys.clear();
-		thing.clear();
+		//keys.clear();
+		//thing.clear();
 		
-		return events;
+		return keys;
 	}
 	
 	public ArrayList<Integer> getMouseEvents(){

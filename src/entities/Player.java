@@ -1,6 +1,7 @@
 package entities;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import Main.Main;
 public class Player extends Character implements Updatable{
@@ -79,8 +80,7 @@ public class Player extends Character implements Updatable{
 	
 	
 	public void update(){
-		ArrayList<Integer>keys = Main.getKeyEvents().get(0);
-		ArrayList<Integer>thing = Main.getKeyEvents().get(1);
+		HashSet<Integer>keys = Main.getKeyEvents();
 		ArrayList<Integer> mouse = Main.getMouseEvents();
 		int keySize = keys.size();
 		

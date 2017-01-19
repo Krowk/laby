@@ -2,6 +2,7 @@ package Main;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import entities.Bloc;
 import entities.Updatable;
@@ -15,7 +16,7 @@ public class Main {
 	private static int TPS_target	= 128;
 	private static int FrameRate	= 1000000000 / FPS_target;
 	private static int TickRate		= 1000000000 / TPS_target;
-	private static ArrayList<ArrayList<Integer>> keys;
+	private static HashSet<Integer> keys;
 	private static ArrayList<Integer> mouse;
 	private static AwtManager awtManager;
 	public static int state=0;
@@ -139,7 +140,7 @@ public class Main {
 		
 	}
 	
-	public static ArrayList<ArrayList<Integer>> getKeyEvents(){
+	public static HashSet<Integer> getKeyEvents(){
 		return keys;
 	}
 

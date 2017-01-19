@@ -55,7 +55,7 @@ public abstract class Entity {
 		if (this instanceof Bloc){
 			if(Collision.collision((Bloc)this)){
 				posX -= speedX;
-				speedX =0;
+				//speedX =0;
 			}
 		}
 		
@@ -70,7 +70,7 @@ public abstract class Entity {
 		if (this instanceof Bloc){
 			if (Collision.collision((Bloc)this)){
 				posY -= speedY;
-				speedY =0;
+				//speedY =0;
 			}
 		}
 	}
