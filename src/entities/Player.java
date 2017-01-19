@@ -82,45 +82,28 @@ public class Player extends Character implements Updatable{
 	public void update(){
 		HashSet<Integer>keys = Main.getKeyEvents();
 		ArrayList<Integer> mouse = Main.getMouseEvents();
-		int keySize = keys.size();
 		
-		for (int i = 0; i < keySize; i++) {
-			switch (keys.get(i)) {
-			case KeyEvent.VK_Z:
-				if (thing.get(i) == 1){
-					setSpeedY(-speedMax);
-				}
-				else{
-					setSpeedY(0);
-				}
-				break;
-			case KeyEvent.VK_S:
-				if (thing.get(i) == 1){
-					setSpeedY(speedMax);					
-				}
-				else{
-					setSpeedY(0);
-				}
-				break;	
-			case KeyEvent.VK_Q:
-				if (thing.get(i) == 1){
-					setSpeedX(-speedMax);					
-				}
-				else{
-					setSpeedX(0);
-				}
-				break;
-			case KeyEvent.VK_D:
-				if (thing.get(i) == 1){
-					setSpeedX(speedMax);					
-				}
-				else{
-					setSpeedX(0);
-				}
-				break;
-			default:
-				break;
+		if (keys.contains(KeyEvent.VK_Z)){
+			if (!keys.contains(KeyEvent.VK_S)){
+				setSpeedY(-speedMax);
 			}
+		}
+		else if (keys.contains(KeyEvent.VK_S)){
+			setSpeedY(speedMax);
+		}
+		else{
+			setSpeedY(0);
+		}
+		if (keys.contains(KeyEvent.VK_Q)){
+			if (!keys.contains(KeyEvent.VK_D)){
+				setSpeedX(-speedMax);
+			}
+		}
+		else if (keys.contains(KeyEvent.VK_D)){
+			setSpeedX(speedMax);
+		}
+		else{
+			setSpeedX(0);
 		}
 		
 		for (int i : mouse) {
