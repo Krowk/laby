@@ -107,7 +107,7 @@ public class Player extends Character implements Updatable{
 		}
 		
 		for (int i : mouse) {
-			useInventory(i);
+			if (i < itemsMax) useInventory(i);
 		}
 		
 		counterForce++;

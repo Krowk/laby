@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import Main.Main;
 import Main.Maze;
 import entities.Bloc;
 import entities.Camera;
@@ -42,9 +43,8 @@ public class AwtManager {
 	private BufferStrategy bs;
 	private ImagesManager im;
 	private HashSet<Integer> keys = new HashSet<Integer>();
-	//private ArrayList<Integer> thing = new ArrayList<Integer>();
 	private ArrayList<Integer> actions = new ArrayList<Integer>();
-
+	
 	
 // Constructors -----------------------------------------------
 	/**
@@ -98,12 +98,38 @@ public class AwtManager {
 				int y = e.getPoint().y;
 				int w = frame.getWidth();
 				int h = frame.getHeight();
-				for (int i = 0; i <= 4; i++) {
-					if (x >((8+i)*w/16)  &&  x <((8+i)*w/16 + 2*w/36)){
-						if (y > 1*h/36 && y < 1*h/36 + 2*w/36){
-							actions.add(i);
+				if (Main.state == 0){					
+					for (int i = 0; i <= 4; i++) {
+						if (x >((8+i)*w/16)  &&  x <((8+i)*w/16 + 2*w/36)){
+							if (y > 1*h/36 && y < 1*h/36 + 2*w/36){
+								actions.add(i);
+							}
+						}	
+					}
+				}
+				if (Main.state == 1){
+					if ( x > (w/3)-(w/6)  &&  x < (w/3)+(w/6)){
+						if (y > (2*h/3)-(h/6) && y < (2*h/3)+(h/6)){
+							actions.add(-1);
 						}
-					}	
+					}
+					if ( x > (2*w/3)-(w/6)  &&  x < (2*w/3)+(w/6)){
+						if (y > (2*h/3)-(h/6) && y < (2*h/3)+(h/6)){
+							actions.add(-2);
+						}
+					}
+				}
+				if (Main.state == 2){
+					if ( x > (w/3)-(w/6)  &&  x < (w/3)+(w/6)){
+						if (y > (2*h/3)-(h/6) && y < (2*h/3)+(h/6)){
+							actions.add(-1);
+						}
+					}
+					if ( x > (2*w/3)-(w/6)  &&  x < (2*w/3)+(w/6)){
+						if (y > (2*h/3)-(h/6) && y < (2*h/3)+(h/6)){
+							actions.add(-2);
+						}
+					}
 				}
 			}
 		
@@ -235,12 +261,39 @@ public class AwtManager {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font(g.getFont().getName(), Font.BOLD, 60));
 				g.drawString("YOU DIED", (w/2)-(g.getFontMetrics().stringWidth("YOU DIED")/2), h/2);
+				g.setFont(new Font(g.getFont().getName(), Font.BOLD, 30));
+				g.drawString("RETRY", (w/3)-(g.getFontMetrics().stringWidth("RETRY")/2), 2*h/3);
+				g.drawString("QUIT", (2*w/3)-(g.getFontMetrics().stringWidth("RETRY")/2), 2*h/3);
 				g.dispose();
 			} while (bs.contentsRestored());
 			bs.show();
 		} while (bs.contentsLost());
 	}
 	
+	public void win(){
+		do {
+			do{
+				Graphics2D g = (Graphics2D) bs.getDrawGraphics();
+				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				g.setColor(Color.BLACK);
+				int w = frame.getWidth();
+				int h = frame.getHeight();
+				g.fillRect(0, 0, w, h);
+				g.setColor(Color.WHITE);
+				g.setFont(new Font(g.getFont().getName(), Font.BOLD, 60));
+				g.drawString("YOU WON", (w/2)-(g.getFontMetrics().stringWidth("YOU WON")/2), h/2);
+				g.setFont(new Font(g.getFont().getName(), Font.BOLD, 30));
+				g.drawString("AGAIN", (w/3)-(g.getFontMetrics().stringWidth("AGAIN")/2), 2*h/3);
+				g.drawString("QUIT", (2*w/3)-(g.getFontMetrics().stringWidth("RETRY")/2), 2*h/3);
+				g.dispose();
+			} while (bs.contentsRestored());
+			bs.show();
+		} while (bs.contentsLost());
+	}
+
+	public void close(){
+		System.exit(0);
+	}
 // Static methods ---------------------------------------------
 	
 // Getters ----------------------------------------------------
@@ -265,16 +318,6 @@ public class AwtManager {
 	 * @return an arraylist of the keys stroked
 	 */
 	public HashSet<Integer> getKeyEvents(){
-		//HashSet<Integer> a = (HashSet<Integer>) keys.clone();
-		//ArrayList<Integer> b = (ArrayList<Integer>) thing.clone();
-		
-		//ArrayList<ArrayList<Integer>> events = new ArrayList<>();
-		//events.add(a);
-		//events.add(b);
-		
-		//keys.clear();
-		//thing.clear();
-		
 		return keys;
 	}
 	

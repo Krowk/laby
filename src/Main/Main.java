@@ -31,6 +31,13 @@ public class Main {
 				break;
 			case 1:
 				loose();
+				break;
+			case 2:
+				win();
+				break;
+			case 3:
+				load();
+				break;
 			default:
 				break;
 			}
@@ -38,6 +45,8 @@ public class Main {
 		}
 	}
 	
+	
+
 	public static void mainLoop(){
 		Maze maze = Maze.createMaze("src/test.txt");
 		Maze.activeMaze = maze;
@@ -132,11 +141,33 @@ public class Main {
 	}
 	
 	public static void loose(){
-		awtManager.loose();
 		
+		
+		while(state ==1){
+			awtManager.loose();
+			mouse = awtManager.getMouseEvents();
+			for (Integer i : mouse) {
+				switch (i) {
+				case -1:
+					state = 0;
+					break;
+				case -2:
+					
+					awtManager.close();
+					break;
+				default:
+					break;
+				}
+			}
+			
+		}
 	}
 	
 	public static void win(){
+		awtManager.win();
+	}
+	public static void load() {
+		
 		
 	}
 	
