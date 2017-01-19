@@ -85,12 +85,12 @@ public abstract class Bloc extends Entity{
 	public double getCornerX(int corner){
 		double res = this.posX;
 		if (corner == 1){ return res;}
-		res += ((Math.cos(this.angle.getRadian()))* this.length);
+		res += Collision.rounding((Math.cos(this.angle.getRadian()))* this.length);
 		if (corner == 2){ return res;}
-		res += (Math.cos(this.angle.getRadian()+Math.PI/2)* this.width);
+		res += Collision.rounding(Math.cos(this.angle.getRadian()+Math.PI/2)* this.width);
 		if (corner == 3){ return res;}
 		else{
-			return (res + Math.cos(this.angle.getRadian()+Math.PI)* this.length);
+			return Collision.rounding(res + Math.cos(this.angle.getRadian()+Math.PI)* this.length);
 		}
 	}
 
@@ -102,12 +102,12 @@ public abstract class Bloc extends Entity{
 	public double getCornerY(int corner){
 		double res = this.posY;
 		if (corner == 1){ return res;}
-		res += (Math.sin(this.angle.getRadian())* this.length);
+		res += Collision.rounding(Math.sin(this.angle.getRadian())* this.length);
 		if (corner == 2){ return res;}
-		res += (Math.sin(this.angle.getRadian()+Math.PI/2)* this.width);
+		res += Collision.rounding(Math.sin(this.angle.getRadian()+Math.PI/2)* this.width);
 		if (corner == 3){ return res;}
 		else{
-			return (res + Math.sin(this.angle.getRadian()+Math.PI)* this.length);
+			return Collision.rounding(res + Math.sin(this.angle.getRadian()+Math.PI)* this.length);
 		}
 	}
 
