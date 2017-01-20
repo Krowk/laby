@@ -38,5 +38,10 @@ public abstract class Lootable extends Bloc {
 		return id;
 	}
 	
-
+	public void pickup(){
+		onFloor = false;
+	}
+	public boolean isOnFloor(){
+		return onFloor;
+	}
 }

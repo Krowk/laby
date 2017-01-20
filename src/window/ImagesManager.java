@@ -30,6 +30,7 @@ public class ImagesManager {
 		names.add("Food1");
 		names.add("Cook");
 		names.add("Monster");
+		names.add("Key");
 	}
 	
 	public BufferedImage getImage(String name){

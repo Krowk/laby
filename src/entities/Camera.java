@@ -1,11 +1,14 @@
 package entities;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class Camera {
 	private Player player;
 	private static Camera camera;
-	private int width = 160;
-	private int height = 90;
+	Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+	private int width = d.width/10;
+	private int height = d.height/10;
 	
 	public Camera(Player player){
 		this.player = player;

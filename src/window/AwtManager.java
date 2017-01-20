@@ -15,9 +15,12 @@ import Main.Maze;
 import entities.Bloc;
 import entities.Camera;
 import entities.Entity;
+import entities.Food;
+import entities.Key;
 import entities.Lootable;
 import entities.Monster;
 import entities.Player;
+import entities.SecretDoor;
 import entities.Character;
 
 import entities.Cook;
@@ -55,7 +58,7 @@ public class AwtManager {
 		frame = new Frame("Game");
 		
 		canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(800, 450));
+		canvas.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
 		frame.add(canvas);
 		canvas.setFocusable(true);
 		
@@ -93,15 +96,18 @@ public class AwtManager {
 		
 		canvas.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
-				
-				int x = e.getPoint().x;
-				int y = e.getPoint().y;
 				int w = frame.getWidth();
 				int h = frame.getHeight();
+				int a = canvas.getWidth();
+				int b = canvas.getHeight();
+				int x = (int) (e.getPoint().x * ((double)w/a));
+				int y = (int) (e.getPoint().y * ((double)h/b));
+				
 				if (Main.state == 0){					
 					for (int i = 0; i <= 4; i++) {
-						if (x >((8+i)*w/16)  &&  x <((8+i)*w/16 + 2*w/36)){
-							if (y > 1*h/36 && y < 1*h/36 + 2*w/36){
+						
+						if (x >=((8+i)*w/16 )  &&  x <=((8+i)*w/16 + 2*w/36)){
+							if (y >= 1*h/36 && y <= 1*h/36 + 2*w/36){
 								actions.add(i);
 							}
 						}	
@@ -175,7 +181,7 @@ public class AwtManager {
 				if (c != null){
 					g.scale(w/c.getWidth(), h/c.getHeight());
 					g.translate(-c.getX()+(c.getWidth()/2),- c.getY()+(c.getHeight()/2));
-					//g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
+					
 				}
 				
 				for (Entity prout : content) {
@@ -188,6 +194,7 @@ public class AwtManager {
 					else{
 						if (b instanceof Player) g.setColor(Color.RED);
 						if (b instanceof Door) g.setColor(new Color(195,143,38));
+						if (b instanceof SecretDoor) g .setColor(Color.BLACK);
 						g.fill(new Rectangle((int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth()));
 					}
 					g.rotate(-radian, b.getPosX(), b.getPosY());
@@ -220,6 +227,7 @@ public class AwtManager {
 				
 				// HUD
 				g.setColor(Color.BLACK);
+				g.fillRect(651, 12, 10, 10);
 				g.drawString("TPS: " +String.valueOf((int)TPS), 0, 20);
 				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 40);
 				g.drawString("x: "+c.getX(), 0, 60);
@@ -240,7 +248,11 @@ public class AwtManager {
 				Lootable[] loots = p.getInventory();
 				int size = loots.length;
 				for (int i =0; i < size; i++) {
-					if (loots[i] != null) g.drawImage(im.getImage("Food1"), ((8+i)*w/16), 1*h/36, 2*w/36, 2*w/36, null); 
+					if (loots[i] != null && loots[i] instanceof Food){
+						//System.out.println(((8+i)*w/16));
+						g.drawImage(im.getImage("Food1"), ((8+i)*w/16), 1*h/36, 2*w/36, 2*w/36, null); 
+					}
+					else if (loots[i] != null && loots[i] instanceof Key) g.drawImage(im.getImage("Key"), ((8+i)*w/16), 1*h/36, 2*w/36, 2*w/36, null);
 				}
 				
 				g.dispose();

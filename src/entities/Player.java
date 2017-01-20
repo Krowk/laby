@@ -13,6 +13,8 @@ public class Player extends Character implements Updatable{
 	private Lootable[] tabItems;
 	private int itemsMax;
 	private int counterForce;
+	private int counterFight;
+	private boolean canFight= true;
 	
 // Constructors -----------------------------------------------------------------
 	public Player(int posX, int posY, int length, int width, int life, int force, int itemsMax) {
@@ -33,18 +35,19 @@ public class Player extends Character implements Updatable{
 	public void putInInventory(Lootable x){
 		int i = 0;
 		int item = 1;
-		
 		while( i < tabItems.length && item > 0){
 			
-			if(tabItems[i] == null){
+			if(tabItems[i] == null && x.isOnFloor()){
 				tabItems[i]=x;
-				item = item-1;
+				x.pickup();
+				item = 0;
+				x.width=0;
+				x.length=0;
 			}
 			
 			i++;
 		}
-		x.width=0;
-		x.length=0;
+		
 	}
 	/*
 	public void printInventory(){
@@ -73,8 +76,10 @@ public class Player extends Character implements Updatable{
 			if (l instanceof Food){
 				Food f = (Food) l;
 				eat(f);
+				tabItems[n] = null;
 			}
-			tabItems[n] = null;
+			
+			
 		}
 	}
 	
@@ -115,6 +120,11 @@ public class Player extends Character implements Updatable{
 			loseForce(1);
 			counterForce = 0;
 		}
+		counterFight++;
+		if (counterFight> 128*0.5 && !canFight){
+			canFight = true;
+			counterFight = 0;
+		}
 		super.update();
 	}
 		
@@ -151,8 +161,11 @@ public class Player extends Character implements Updatable{
 			}
 			
 			else if (b instanceof Monster){
-				Monster m = (Monster) b;
-				attack(this,m);			
+				if (canFight){
+					Monster m = (Monster) b;
+					attack(this,m);	
+					canFight = false;
+				}
 				
 			}
 			
@@ -165,7 +178,14 @@ public class Player extends Character implements Updatable{
 				}
 			}
 			
-
+			
+			else if (b instanceof SecretDoor){
+				SecretDoor s = (SecretDoor) b;
+				
+				this.posX = ((SecretDoor) b).getTpPosX();
+				this.posY = ((SecretDoor) b).getTpPosY();
+				
+			}
 			else if(b instanceof Door){
 				Door d = (Door) b;
 				
@@ -209,18 +229,12 @@ public class Player extends Character implements Updatable{
 				
 			}
 			
-			else if (b instanceof SecretDoor){
-				SecretDoor s = (SecretDoor) b;
-				
-				this.posX = ((SecretDoor) b).getTpPosX();
-				this.posY = ((SecretDoor) b).getTpPosY();
-				
-			}
+			
 			
 			
 			else if (b instanceof Safe){
 				Safe s = (Safe) b;
-				// A FINIR (fin du jeu)
+				Main.state = 2;
 
 			}
 			

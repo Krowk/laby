@@ -48,6 +48,7 @@ public class Main {
 	
 
 	public static void mainLoop(){
+		System.out.println("prout");
 		Maze maze = Maze.createMaze("src/test.txt");
 		Maze.activeMaze = maze;
 		
@@ -77,7 +78,7 @@ public class Main {
 				TPS_tab.add(0);
 			}
 			// Main loop ----------------------------------------------
-			while (state == 0){
+			loop : while (state == 0){
 				
 				currentTime = System.nanoTime();
 				elapsedTime1 += currentTime - lastTime;
@@ -107,6 +108,9 @@ public class Main {
 					mouse = awtManager.getMouseEvents();
 					for (Updatable u : updatables) {
 						u.update();
+					}
+					if (state != 0){
+						break loop;
 					}
 					////////////////////////
 					lastTick = System.nanoTime();
@@ -143,6 +147,8 @@ public class Main {
 	public static void loose(){
 		
 		
+		Maze.activeMaze = null;
+		Maze.deleteAll();
 		while(state ==1){
 			awtManager.loose();
 			mouse = awtManager.getMouseEvents();

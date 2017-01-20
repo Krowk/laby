@@ -119,6 +119,7 @@ public class Character extends Bloc {
 			Maze.deleteEntity(this);
 			if (this instanceof Player){
 				Main.state = 1;
+				
 			}
 		}
 		

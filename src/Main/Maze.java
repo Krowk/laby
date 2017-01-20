@@ -133,7 +133,8 @@ public class Maze {
 				if (currentLine.equals("wall") || currentLine.equals("door") || currentLine.equals("stair")
 						|| currentLine.equals("elevator") || currentLine.equals("key") || currentLine.equals("character")
 						|| currentLine.equals("player") || currentLine.equals("cook") || currentLine.equals("medic")
-						|| currentLine.equals("monster") || currentLine.equals("food") || currentLine.equals("safe")){
+						|| currentLine.equals("monster") || currentLine.equals("food") || currentLine.equals("safe")
+						|| currentLine.equals("secretDoor")){
 					type = currentLine;
 				}
 				else{
@@ -165,6 +166,13 @@ public class Maze {
 						break;
 						case "safe":
 							maze.addEntityToMaze(new Safe(buff.get(0),buff.get(1),buff.get(2),buff.get(3),buff.get(4), true, false));
+							break;
+						case "key":
+							maze.addEntityToMaze(new Key(buff.get(0), buff.get(1), buff.get(2), buff.get(3), true, buff.get(4)));
+							break;
+						case "secretDoor":
+							maze.addEntityToMaze(SecretDoor.createDoor(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4)));
+							break;
 						default:
 					}
 					
@@ -186,6 +194,12 @@ public class Maze {
 		activeMaze.maze.remove(e);
 	}
 	
+	public static void deleteAll(){
+		Wall.walls.clear();
+		characters.clear();
+		Door.doors.clear();
+		Elevator.elevators.clear();
+	}
 // Getters -----------------------------------------------------	
 	/**
 	 * 

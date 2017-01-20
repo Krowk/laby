@@ -7,14 +7,17 @@ public class SecretDoor extends Door{
 	
 	
 	
-	public SecretDoor(Wall wall, int position, int length, boolean open, int tpPosX, int tpPosY) {
-		super(wall, position, length, open);
+	public SecretDoor(Wall wall, int position, int length, int tpPosX, int tpPosY) {
+		super(wall, position, length, true);
 		this.tpPosX = tpPosX;
 		this.tpPosY = tpPosY;
-		this.open = true;
+		
 	}
 
-
+	public static SecretDoor createDoor(int wallid, int position, int length, int tpPosX, int tpPosY){
+		Wall wall = Wall.getWallFromId(wallid);
+		return new SecretDoor(wall, position, length, tpPosX, tpPosY);
+	}
 
 
 	public int getTpPosX() {
