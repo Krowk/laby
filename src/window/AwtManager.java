@@ -234,20 +234,26 @@ public class AwtManager {
 				g.fillRect(651, 12, 10, 10);
 				g.drawString("TPS: " +String.valueOf((int)TPS), 0, 20);
 				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 40);
-				g.drawString("x: "+c.getX(), 0, 60);
-				g.drawString("y: "+c.getY(), 0, 80);
+				//g.drawString("x: "+c.getX(), 0, 60);
+				//g.drawString("y: "+c.getY(), 0, 80);
 				Player p = c.getPlayer();
 				double l =(double)  p.getLife()/p.getLifeMax();
 				g.setColor(Color.RED);
 				g.drawRect(2*w/16, 1*h/36, 2*w/16, w/36);
 				g.setColor(Color.PINK);
 				g.fillRect((2*w/16)+1, 1*h/36, ((int) ((double)(2*w/16)*l))-1, w/36);
+				g.setColor(Color.BLACK);
+				g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 20));
+				g.drawString(p.getLife()+ " /" + p.getLifeMax(), (2*w/16)+ ((2*w/16) /4), (1*h/36)+g.getFontMetrics().getHeight());
 				
 				double f =(double)  p.getForce()/p.getForceMax();
 				g.setColor(Color.BLACK);
 				g.drawRect(5*w/16, 1*h/36, 2*w/16, w/36);
 				g.setColor(new Color(195,143,38));
 				g.fillRect((5*w/16)+1, 1*h/36, ((int) ((double)(2*w/16)*f))-1, w/36);
+				g.setColor(Color.BLACK);
+				g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 20));
+				g.drawString(p.getForce()+ " /" + p.getForceMax(), 5*w/16+ ((2*w/16) /4), (1*h/36)+g.getFontMetrics().getHeight());
 				
 				Lootable[] loots = p.getInventory();
 				int size = loots.length;
