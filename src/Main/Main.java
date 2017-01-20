@@ -48,7 +48,6 @@ public class Main {
 	
 
 	public static void mainLoop(){
-		System.out.println("prout");
 		Maze maze = Maze.createMaze("src/test.txt");
 		Maze.activeMaze = maze;
 		

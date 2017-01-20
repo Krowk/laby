@@ -18,6 +18,7 @@ import entities.Entity;
 import entities.Food;
 import entities.Key;
 import entities.Lootable;
+import entities.Medic;
 import entities.Monster;
 import entities.Player;
 import entities.SecretDoor;
@@ -191,6 +192,9 @@ public class AwtManager {
 					g.setColor(Color.BLACK);
 					if (b instanceof Cook) g.drawImage(im.getImage("Cook"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
 					else if (b instanceof Monster) g.drawImage(im.getImage("Monster"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
+					else if (b instanceof Food) g.drawImage(im.getImage("Food1"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
+					else if (b instanceof Key) g.drawImage(im.getImage("Key"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);					
+					else if (b instanceof Medic)g.drawImage(im.getImage("Medic"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
 					else{
 						if (b instanceof Player) g.setColor(Color.RED);
 						if (b instanceof Door) g.setColor(new Color(195,143,38));
