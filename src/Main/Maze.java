@@ -157,17 +157,17 @@ public class Maze {
 							maze.addEntityToMaze(new Player(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), buff.get(6)));
 							break;
 						case "cook":
-							maze.addEntityToMaze(new Cook(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5),0, null));
+							maze.addEntityToMaze(new Cook(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5),buff.get(6), null));
 							break;
 						case "medic":
 							maze.addEntityToMaze(new Medic(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
 							break;
 						case "monster":
 							maze.addEntityToMaze(new Monster(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5)));
-						break;
+							break;
 						case "food":
 							maze.addEntityToMaze(new Food(buff.get(0), buff.get(1), buff.get(2), buff.get(3), buff.get(4), buff.get(5), true, buff.get(6)));
-						break;
+							break;
 						case "safe":
 							maze.addEntityToMaze(new Safe(buff.get(0),buff.get(1),buff.get(2),buff.get(3),buff.get(4), true, false));
 							break;

@@ -22,9 +22,13 @@ public class Monster extends Character implements Updatable{
 		double y = p.getPosY();
 		setSpeedX(0);
 		setSpeedY(0);
-		if (Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2)) < 30 && counter ==0 ){
+		if (counter ==0 && Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2)) < 40){
 			setSpeedX(-Math.signum(posX - x) * speedMax);
 			setSpeedY(-Math.signum(posY - y) * speedMax);
+		}
+		else if (counter !=0 && Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2)) > 10){
+			setSpeedX(Math.signum(posX - x) * speedMax);
+			setSpeedY(Math.signum(posY - y) * speedMax);
 		}
 		ArrayList<Entity> entities =Maze.activeMaze.getMazeContent();
 		ArrayList<Monster> monsters = new ArrayList<>();

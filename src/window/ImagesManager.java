@@ -32,6 +32,7 @@ public class ImagesManager {
 		names.add("Monster");
 		names.add("Key");
 		names.add("Medic");
+		names.add("Safe");
 	}
 	
 	public BufferedImage getImage(String name){

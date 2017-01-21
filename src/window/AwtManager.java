@@ -21,6 +21,7 @@ import entities.Lootable;
 import entities.Medic;
 import entities.Monster;
 import entities.Player;
+import entities.Safe;
 import entities.SecretDoor;
 import entities.Character;
 
@@ -98,16 +99,17 @@ public class AwtManager {
 		canvas.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				
-				int w = frame.getWidth();
-				int h = frame.getHeight();
-				int a = canvas.getWidth();
-				int b = canvas.getHeight();
-				int x = (int) (e.getPoint().x * ((double)w/a));
-				int y = (int) (e.getPoint().y * ((double)h/b));
 				
+				int w = canvas.getWidth();
+				int h = canvas.getHeight();
+				int a = frame.getWidth() - w;
+				int b = frame.getHeight() - h;
+				int x = e.getPoint().x + a;
+				int y = e.getPoint().y + b;
 				if (Main.state == 0){					
 					for (int i = 0; i <= 4; i++) {
-						
+						//System.out.println(((8+i)*w/16 ));
+						//System.out.println((8+i)*w/16 + 2*w/36);
 						if (x >=((8+i)*w/16 )  &&  x <=((8+i)*w/16 + 2*w/36)){
 							if (y >= 1*h/36 && y <= 1*h/36 + 2*w/36){
 								actions.add(i);
@@ -196,6 +198,7 @@ public class AwtManager {
 					else if (b instanceof Food) g.drawImage(im.getImage("Food1"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
 					else if (b instanceof Key) g.drawImage(im.getImage("Key"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);					
 					else if (b instanceof Medic)g.drawImage(im.getImage("Medic"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
+					else if (b instanceof Safe) g.drawImage(im.getImage("Safe"),(int)b.getPosX(),(int) b.getPosY(), b.getLength(), b.getWidth(),null);
 					else{
 						if (b instanceof Player) g.setColor(Color.RED);
 						if (b instanceof Door) g.setColor(new Color(195,143,38));
@@ -234,8 +237,8 @@ public class AwtManager {
 				g.setColor(Color.BLACK);
 				g.drawString("TPS: " +String.valueOf((int)TPS), 0, 20);
 				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 40);
-				//g.drawString("x: "+c.getX(), 0, 60);
-				//g.drawString("y: "+c.getY(), 0, 80);
+				g.drawString("x: "+c.getX(), 0, 60);
+				g.drawString("y: "+c.getY(), 0, 80);
 				Player p = c.getPlayer();
 				double l =(double)  p.getLife()/p.getLifeMax();
 				g.setColor(Color.RED);

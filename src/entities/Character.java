@@ -97,7 +97,10 @@ public class Character extends Bloc {
 	public void gainForce(int x) {
 		this.force = this.force + x;
 		if (force > forceMax){
+			int dif= force - forceMax;
 			force = forceMax;
+			forceMax += dif;
+			
 		}
 	}
 		

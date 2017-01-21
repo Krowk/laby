@@ -13,7 +13,7 @@ public class Cook extends Character implements Updatable{
 // Constructors -----------------------------------------------------------------
 	public Cook(int posX, int posY, int length, int width, int life, int force, int nombreFoods, Food food) {
 		super(posX, posY, length, width, life, force);
-		this.nombreFoods = 3;
+		this.nombreFoods = nombreFoods;
 		
 		this.food = food;
 	}

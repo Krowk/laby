@@ -160,7 +160,7 @@ public class Player extends Character implements Updatable{
 				int i =0;
 				while(c.getNombreFoods()>0){
 					
-					putInInventory(new Food(0,0,0,0,50,50,false,i));
+					putInInventory(new Food(0,0,0,0,20,30,true,i));
 					c.removeFood();
 					i++;
 				}		
