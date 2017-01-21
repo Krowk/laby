@@ -36,6 +36,12 @@ public abstract class Entity {
 		this.posY = posY;
 		this.isSolid = isSolid;
 	}
+  	
+  	public Entity(double posX, double posY, boolean isSolid){
+  		this.posX = posX;
+		this.posY = posY;
+		this.isSolid = isSolid;
+  	}
 	
 // dynamic methods --------------------------------------------
 	/**

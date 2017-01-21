@@ -181,30 +181,31 @@ public class Collision {
 	}
 
 	/**
-	 * Check if a Bloc and an Entity are colliding
+	 * Check if a Bloc and a point are colliding
 	 * @param a the Bloc
-	 * @param b the Entity
+	 * @param b the Point
 	 * @return true if they are colliding
 	 */
-	public static boolean blocEntity(Bloc a, Entity b) {
+	public static boolean blocPoint(Bloc a, double[] b) {
+		
 		boolean faces[] = new boolean[8];
-		faces[0] = (b.getPosX() >= Math.min(a.getCornerX(1), a.getCornerX(2))
-				&& (b.getPosX() <= Math.max(a.getCornerX(1), a.getCornerX(2))));
-		faces[1] = (b.getPosX() >= Math.min(a.getCornerX(2), a.getCornerX(3))
-				&& (b.getPosX() <= Math.max(a.getCornerX(2), a.getCornerX(3))));
-		faces[2] = (b.getPosX() >= Math.min(a.getCornerX(3), a.getCornerX(4))
-				&& (b.getPosX() <= Math.max(a.getCornerX(3), a.getCornerX(4))));
-		faces[3] = (b.getPosX() >= Math.min(a.getCornerX(4), a.getCornerX(1))
-				&& (b.getPosX() <= Math.max(a.getCornerX(4), a.getCornerX(1))));
+		faces[0] = (b[0] >= Math.min(a.getCornerX(1), a.getCornerX(2))
+				&& (b[0] <= Math.max(a.getCornerX(1), a.getCornerX(2))));
+		faces[1] = (b[0] >= Math.min(a.getCornerX(2), a.getCornerX(3))
+				&& (b[0] <= Math.max(a.getCornerX(2), a.getCornerX(3))));
+		faces[2] = (b[0] >= Math.min(a.getCornerX(3), a.getCornerX(4))
+				&& (b[0] <= Math.max(a.getCornerX(3), a.getCornerX(4))));
+		faces[3] = (b[0] >= Math.min(a.getCornerX(4), a.getCornerX(1))
+				&& (b[0] <= Math.max(a.getCornerX(4), a.getCornerX(1))));
 
-		faces[4] = (b.getPosY() >= Math.min(a.getCornerY(1), a.getCornerY(2))
-				&& (b.getPosY() <= Math.max(a.getCornerY(1), a.getCornerY(2))));
-		faces[5] = (b.getPosY() >= Math.min(a.getCornerY(2), a.getCornerY(3))
-				&& (b.getPosY() <= Math.max(a.getCornerY(2), a.getCornerY(3))));
-		faces[6] = (b.getPosY() >= Math.min(a.getCornerY(3), a.getCornerY(4))
-				&& (b.getPosY() <= Math.max(a.getCornerY(3), a.getCornerY(4))));
-		faces[7] = (b.getPosY() >= Math.min(a.getCornerY(4), a.getCornerY(1))
-				&& (b.getPosY() <= Math.max(a.getCornerY(4), a.getCornerY(1))));
+		faces[4] = (b[1] >= Math.min(a.getCornerY(1), a.getCornerY(2))
+				&& (b[1] <= Math.max(a.getCornerY(1), a.getCornerY(2))));
+		faces[5] = (b[1] >= Math.min(a.getCornerY(2), a.getCornerY(3))
+				&& (b[1] <= Math.max(a.getCornerY(2), a.getCornerY(3))));
+		faces[6] = (b[1] >= Math.min(a.getCornerY(3), a.getCornerY(4))
+				&& (b[1] <= Math.max(a.getCornerY(3), a.getCornerY(4))));
+		faces[7] = (b[1] >= Math.min(a.getCornerY(4), a.getCornerY(1))
+				&& (b[1] <= Math.max(a.getCornerY(4), a.getCornerY(1))));
 		int x = 0;
 		for (int i = 0; i < faces.length - 1; i++) {
 			if (faces[i]) {

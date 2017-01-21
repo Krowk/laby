@@ -97,6 +97,7 @@ public class AwtManager {
 		
 		canvas.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
+				
 				int w = frame.getWidth();
 				int h = frame.getHeight();
 				int a = canvas.getWidth();
@@ -231,7 +232,6 @@ public class AwtManager {
 				
 				// HUD
 				g.setColor(Color.BLACK);
-				g.fillRect(651, 12, 10, 10);
 				g.drawString("TPS: " +String.valueOf((int)TPS), 0, 20);
 				g.drawString("FPS: " +String.valueOf((int)FPS), 0, 40);
 				//g.drawString("x: "+c.getX(), 0, 60);

@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 
 import Main.Maze;
+import physics.Angle;
 
 public class Monster extends Character implements Updatable{
 // Fields------------------------------------------------------------------------
@@ -42,7 +43,47 @@ public class Monster extends Character implements Updatable{
 		}
 		
 	}
+
+	public ArrayList<double[]> pathFinding(double[] target){
+		//Init
+		int a = 1;
+		ArrayList<Object> temp;
+		ArrayList<double[]> targets = new ArrayList<>();
+		Line l = Line.getLineBetweenPoints(new double[]{posX,posY}, target);
+		temp = l.getNextBloc(target, this);
+		double[] nextPoint = (double[]) temp.get(0);
+		Bloc b = (Bloc) temp.get(1)  ;
+		if (nextPoint[0] == target[0] && nextPoint[1] == target[1]){
+			targets.add(target);
+			return targets;
+		}
 	
+		
+		
+		targets.add(nextPoint);
+		////////////////
+		l = Line.getLineBetweenPoints(nextPoint,b.nearestCorner(nextPoint));
+		temp = l.getNextBloc(target, this);
+		nextPoint = (double[]) temp.get(0);
+		if ( temp.get(1) != null){b = (Bloc) temp.get(1);}
+		if (nextPoint[0] == target[0] && nextPoint[1] == target[1]){
+			targets.add(target);
+			return targets;
+		}
+		for (double[] p : targets) {
+			if (p.equals(nextPoint)){
+				System.out.println("circlejerk");
+			}
+		}
+		
+		l = Line.getLineBetweenPoints(nextPoint, target);
+		temp = l.getNextBloc(target, this);
+		nextPoint = (double[]) temp.get(0);
+		if ( temp.get(1) != null){b = (Bloc) temp.get(1);}
+		
+		// while? ezpz
+		return targets;
+	}
 	public void update(){
 		IA();
 		if (counter > 0){

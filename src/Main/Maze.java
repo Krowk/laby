@@ -27,6 +27,7 @@ public class Maze {
 	 * The list of all the mazes 
 	 */
 	public static ArrayList<Maze> mazes = new ArrayList<Maze>();
+	public static ArrayList<Bloc> blocs = new ArrayList<>();
 	public static HashMap<Integer, Character> characters;
 	public static Maze activeMaze;
 	
@@ -50,6 +51,9 @@ public class Maze {
 	 */
 	public void addEntityToMaze(Entity entity){
 		this.maze.add(entity);
+		if (entity instanceof Bloc){
+			blocs.add((Bloc)entity);
+		}
 	}
 
 	

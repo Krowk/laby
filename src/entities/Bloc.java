@@ -125,7 +125,28 @@ public abstract class Bloc extends Entity{
 		return res;
 	}
 	
-
+	public double[] nearestCorner(double[] p){
+		double[][] corners = new double[4][];
+		corners[0][0] = getCornerX(1);
+		corners[0][1] = getCornerY(1);
+		double min = Math.sqrt(Math.pow(corners[0][0] - p[0],2) +Math.pow( corners[0][1] - p[1], 2));
+		double next;
+		int mini = 1;
+		for (int i = 2; i <= 4; i++) {
+			corners[i][0] = getCornerX(i);
+			corners[i][1] = getCornerY(i);
+			next = Math.sqrt(Math.pow(corners[i][0] - p[0],2) +Math.pow( corners[i][1] - p[1], 2));
+			if (min >next){
+				min = next;
+				mini = i;
+			}
+		}
+		for (int i = 0; i < p.length; i++) {
+			
+		}
+		return corners[mini];
+		
+	}
 	
 	public boolean collision(Bloc b){
 		double cos = Math.cos(angle.getRadian());
@@ -172,8 +193,8 @@ public abstract class Bloc extends Entity{
 		}
 		return contact;
 	}
-
 	
+
 	public void update(){
 		super.update();
 	}

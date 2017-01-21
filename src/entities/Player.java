@@ -92,6 +92,9 @@ public class Player extends Character implements Updatable{
 			if (!keys.contains(KeyEvent.VK_S)){
 				setSpeedY(-speedMax);
 			}
+			else{
+				setSpeedY(0);
+			}
 		}
 		else if (keys.contains(KeyEvent.VK_S)){
 			setSpeedY(speedMax);
@@ -102,6 +105,9 @@ public class Player extends Character implements Updatable{
 		if (keys.contains(KeyEvent.VK_Q)){
 			if (!keys.contains(KeyEvent.VK_D)){
 				setSpeedX(-speedMax);
+			}
+			else{
+				setSpeedX(0);
 			}
 		}
 		else if (keys.contains(KeyEvent.VK_D)){
