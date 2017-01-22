@@ -246,8 +246,8 @@ public class Player extends Character implements Updatable{
 						
 						double a = playerMidX - doorMidX;
 						double c = playerMidY - doorMidY;
-						posX -= (a*2);
-						posY -= (c*2);
+						posX -= (int)((a*2)+Math.signum(a)*1);
+						posY -= (int)((c*2)+Math.signum(c)*1);
 					}
 				}
 				
