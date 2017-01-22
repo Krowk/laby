@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import Main.Main;
+import physics.Collision;
 public class Player extends Character implements Updatable{
 // Fields------------------------------------------------------------------------
 	// static fields
@@ -63,8 +64,11 @@ public class Player extends Character implements Updatable{
 	
 	public void deletItem(Lootable x){
 		for (int i = 0; i < tabItems.length; i++) {
-			if(x.getId() == tabItems[i].getId()){
-				tabItems[i]=null;
+			if(tabItems[i] != null){
+				if(x.getId() == tabItems[i].getId()){
+					tabItems[i]=null;
+				}
+				
 			}
 		}
 	}
@@ -231,6 +235,20 @@ public class Player extends Character implements Updatable{
 							posX = this.posX + d.width + this.length;
 						}
 					}
+					else{
+						double playerMidX =(posX-speedX) + length/2;
+						double playerMidY =(posY-speedY) + width/2;
+						double doorDemiWidth = d.getWidth()/2;
+						double doorDemiLength=  d.getLength()/2;
+						
+						double doorMidX= (d.posX +(doorDemiLength * Math.cos(d.angle.getRadian()) - doorDemiWidth * Math.sin(d.angle.getRadian())));
+						double doorMidY= (d.posY +(doorDemiLength * Math.sin(d.angle.getRadian()) + doorDemiWidth * Math.cos(d.angle.getRadian())));
+						
+						double a = playerMidX - doorMidX;
+						double c = playerMidY - doorMidY;
+						posX -= (a*2);
+						posY -= (c*2);
+					}
 				}
 				
 				else if(d.open == false){
@@ -332,7 +350,22 @@ public class Player extends Character implements Updatable{
 							}				
 						}
 					}
-				}			
+					else{
+						for (int i = 0; i < tabItems.length; i++) {
+							if (tabItems[i] != null){
+								if (tabItems[i] instanceof Key){
+									Key k = (Key) tabItems[i];
+									if (k.getId() == d.getId()){
+										d.open = true;
+										deletItem(k);
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				
 			}
 			
 			
