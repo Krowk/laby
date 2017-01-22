@@ -195,47 +195,145 @@ public class Player extends Character implements Updatable{
 			else if(b instanceof Door){
 				Door d = (Door) b;
 				
-				if(d.angle.getDegree() == 0 && d.posY<posY){
-					posY = this.posY-d.width-this.length;
-				}
-				
-				else if(d.angle.getDegree() == 0 && d.posY>posY){
-					posY = this.posY+d.width+this.length;
-				}
-				
-
-				else if (b.angle.getDegree() == 270 && b.posX<this.posX){
-					posX = this.posX-b.width-this.length;
-				}
-				else if (d.angle.getDegree() == 270 && d.posX>this.posX){
-					posX = this.posX+this.length+d.width;
-				}
-				
-				
-				
-				/*
-				if(b.length<b.width){
-					if (Math.abs(b.getPosX())<Math.abs(this.posX)){
-						this.posX = this.posX-b.length-this.length;
+				if (d.open == true){
+					
+					if(d.angle.getDegree() == 0 && d.posY<posY){
+						posY = this.posY-d.width-this.length;
+						
 					}
 					
-					else if (Math.abs(b.getPosX())>Math.abs(this.posX)){
-						this.posX = this.posX+b.length+this.length;
+					else if(d.angle.getDegree() == 0 && d.posY>posY){
+						posY = this.posY+d.width+this.length;
+					}
+					
+					if(d.angle.getDegree() == 180 && d.posY<posY){
+						posY = this.posY-d.width-this.length;
+						
+					}
+					
+					else if(d.angle.getDegree() == 180 && d.posY>posY){
+						posY = this.posY+d.width+this.length;
+					}
+					
+					else if(b.angle.getDegree() == 270 && b.posX<this.posX){
+						posX = this.posX-b.width-this.length;
+					}
+					
+					else if(d.angle.getDegree() == 270 && d.posX>this.posX){
+						posX = this.posX+this.length+d.width;
+					}
+					
+					else if(d.angle.getDegree() == 90){
+						if(this.speedX<0){
+							posX = this.posX - d.width - this.length;
+						}
+						if(this.speedX>0){
+							posX = this.posX + d.width + this.length;
+						}
 					}
 				}
-				else{
-					if(Math.abs(b.getPosY()) < Math.abs(this.posY)){
-						this.posY=this.posY-Math.abs(b.width)-Math.abs(this.length);
-					}
-					else if(Math.abs(b.getPosY()) > Math.abs(this.posY)){
-						this.posY=this.posY+Math.abs(this.length)+Math.abs(b.width);
-					}
-				}*/
-
 				
+				else if(d.open == false){
+					
+					if (b.angle.getDegree() == 270 && b.posX<this.posX){
+						for (int j = 0; j < tabItems.length; j++) {
+							if (tabItems[j] != null) {
+								if(tabItems[j].getId() == d.getId()){
+									posX = this.posX-b.width-this.length;
+									d.open = true;
+									deletItem(tabItems[j]);
+								}
+							}
+							
+							
+						}
+					}
+					
+					else if(d.angle.getDegree() == 270 && d.posX>this.posX){
+							for (int j = 0; j < tabItems.length; j++) {
+								if (tabItems[j] != null) {
+									if(tabItems[j].getId() == d.getId()){
+										posX = this.posX+this.length+d.width;
+										d.open = true;
+										deletItem(tabItems[j]);
+									}
+								}	
+							}
+					}
+					
+					else if(d.angle.getDegree() == 90 && this.speedX<0 ){
+						for (int j = 0; j < tabItems.length; j++) {
+							if (tabItems[j] != null) {
+								if(tabItems[j].getId() == d.getId()){
+									posX = this.posX-this.length-d.width;
+									d.open = true;
+									deletItem(tabItems[j]);
+								}
+							}		
+						}
+					}
+					
+					else if(d.angle.getDegree() == 90 && this.speedX>0 ){
+						for (int j = 0; j < tabItems.length; j++) {
+							if (tabItems[j] != null) {
+								if(tabItems[j].getId() == d.getId()){
+									posX = this.posX+this.length+d.width;
+									d.open = true;
+									deletItem(tabItems[j]);
+								}
+							}				
+						}
+					}
+					
+					else if(d.angle.getDegree() == 0 && this.speedY<0 ){
+						for (int j = 0; j < tabItems.length; j++) {
+							if (tabItems[j] != null) {
+								if(tabItems[j].getId() == d.getId()){
+									posY = this.posY-this.length-d.width;
+									d.open = true;
+									deletItem(tabItems[j]);
+								}
+							}		
+						}
+					}
+					
+					else if(d.angle.getDegree() == 0 && this.speedY>0 ){
+						for (int j = 0; j < tabItems.length; j++) {
+							if (tabItems[j] != null) {
+								if(tabItems[j].getId() == d.getId()){
+									posY = this.posY+this.length+d.width;
+									d.open = true;
+									deletItem(tabItems[j]);
+								}
+							}				
+						}
+					}
+					
+					else if(d.angle.getDegree() == 180 && this.speedY<0 ){
+						for (int j = 0; j < tabItems.length; j++) {
+							if (tabItems[j] != null) {
+								if(tabItems[j].getId() == d.getId()){
+									posY = this.posY-this.length-d.width;
+									d.open = true;
+									deletItem(tabItems[j]);
+								}
+							}		
+						}
+					}
+					
+					else if(d.angle.getDegree() == 180 && this.speedY>0 ){
+						for (int j = 0; j < tabItems.length; j++) {
+							if (tabItems[j] != null) {
+								if(tabItems[j].getId() == d.getId()){
+									posY = this.posY+this.length+d.width;
+									d.open = true;
+									deletItem(tabItems[j]);
+								}
+							}				
+						}
+					}
+				}			
 			}
-			
-			
 			
 			
 			else if (b instanceof Safe){
