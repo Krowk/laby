@@ -105,11 +105,17 @@ public class AwtManager {
 				int a = frame.getWidth() - w;
 				int b = frame.getHeight() - h;
 				int x = e.getPoint().x + a;
-				int y = e.getPoint().y + b;
+				int y = e.getPoint().y;
+				Camera c= Camera.getCamera();
+				int t = c.getWidth();
+				int r = c.getHeight();
+				
 				if (Main.state == 0){					
 					for (int i = 0; i <= 4; i++) {
-						//System.out.println(((8+i)*w/16 ));
-						//System.out.println((8+i)*w/16 + 2*w/36);
+						System.out.println(((8+i)*w/16 ));
+						System.out.println((8+i)*w/16 + 2*w/36);
+						System.out.println(1*h/36);
+						System.out.println(1*h/36 + 2*w/36);
 						if (x >=((8+i)*w/16 )  &&  x <=((8+i)*w/16 + 2*w/36)){
 							if (y >= 1*h/36 && y <= 1*h/36 + 2*w/36){
 								actions.add(i);
@@ -172,8 +178,8 @@ public class AwtManager {
 				ArrayList<Entity> content = maze.getMazeContent();
 				Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 				Camera c = Camera.getCamera();
-				int w = frame.getWidth();
-				int h = frame.getHeight();
+				int w = canvas.getWidth();
+				int h = canvas.getHeight();
 				
 				// #antialiasing #ezpz
 				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -183,8 +189,10 @@ public class AwtManager {
 				g.setColor(Color.BLACK);
 				//resizing
 				if (c != null){
+					
+					
 					g.scale(w/c.getWidth(), h/c.getHeight());
-					g.translate(-c.getX()+(c.getWidth()/2),- c.getY()+(c.getHeight()/2));
+					g.translate(-c.getX()+c.getWidth()/2, -c.getY()+c.getHeight()/2);
 					
 				}
 				
@@ -211,8 +219,6 @@ public class AwtManager {
 				//un-resizing
 				if (c != null){
 					
-					
-					//g.setClip(c.getX()-(c.getWidth()/2), c.getY()-(c.getHeight()/2), c.getWidth(), c.getHeight());
 					g.translate(+c.getX()-(c.getWidth()/2),+ c.getY()-(c.getHeight()/2));
 					g.scale(((double)c.getWidth()/w), ((double)c.getHeight()/h));
 				}

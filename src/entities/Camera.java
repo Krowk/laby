@@ -7,8 +7,8 @@ public class Camera {
 	private Player player;
 	private static Camera camera;
 	Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-	private int width = (int)(((double)d.width/d.height)*500.0);
-	private int height = 500;
+	private int width = (int)(((double)d.width/d.height)*50.0);
+	private int height = 50;
 	
 	public Camera(Player player){
 		this.player = player;
@@ -20,6 +20,12 @@ public class Camera {
 	}
 	public int getHeight(){
 		return height;
+	}
+	public int getPlayerLength(){
+		return player.length;
+	}
+	public int getPlayerWidth(){
+		return player.width;
 	}
 	
 	public double getX(){
