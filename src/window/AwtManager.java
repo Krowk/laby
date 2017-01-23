@@ -112,10 +112,7 @@ public class AwtManager {
 				
 				if (Main.state == 0){					
 					for (int i = 0; i <= 4; i++) {
-						System.out.println(((8+i)*w/16 ));
-						System.out.println((8+i)*w/16 + 2*w/36);
-						System.out.println(1*h/36);
-						System.out.println(1*h/36 + 2*w/36);
+						
 						if (x >=((8+i)*w/16 )  &&  x <=((8+i)*w/16 + 2*w/36)){
 							if (y >= 1*h/36 && y <= 1*h/36 + 2*w/36){
 								actions.add(i);

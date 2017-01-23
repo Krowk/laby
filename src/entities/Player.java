@@ -183,7 +183,7 @@ public class Player extends Character implements Updatable{
 				Medic m = (Medic) b;
 				
 				if(m.getVisite() != 0 ){
-					gainLife(50);
+					gainLife(lifeMax);
 					m.havebeenvisited();
 				}
 			}

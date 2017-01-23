@@ -169,7 +169,26 @@ public class Main {
 	}
 	
 	public static void win(){
-		awtManager.win();
+		Maze.activeMaze = null;
+		Maze.deleteAll();
+		while(state ==2){
+			awtManager.win();
+			mouse = awtManager.getMouseEvents();
+			for (Integer i : mouse) {
+				switch (i) {
+				case -1:
+					state = 0;
+					break;
+				case -2:
+					
+					awtManager.close();
+					break;
+				default:
+					break;
+				}
+			}
+			
+		}
 	}
 	public static void load() {
 		
