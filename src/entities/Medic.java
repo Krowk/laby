@@ -10,13 +10,13 @@ public class Medic extends Character implements Updatable{
 // Constructors -----------------------------------------------------------------	
 	public Medic(int posX, int posY, int length, int width, int life, int force) {
 		super(posX, posY, length, width, life, force);
-		this.visite = 1;
+		this.visite = 3;
 	}
 
 // Dynamic methods --------------------------------------------------------------
 	
 	public int havebeenvisited(){
-		return visite = 0;
+		return visite -=1;
 	}
 	
 // Static methods ---------------------------------------------------------------	

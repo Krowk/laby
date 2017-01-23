@@ -102,14 +102,8 @@ public class AwtManager {
 				
 				int w = canvas.getWidth();
 				int h = canvas.getHeight();
-				int a = frame.getWidth() - w;
-				int b = frame.getHeight() - h;
-				int x = e.getPoint().x + a;
+				int x = e.getPoint().x;
 				int y = e.getPoint().y;
-				Camera c= Camera.getCamera();
-				int t = c.getWidth();
-				int r = c.getHeight();
-				
 				if (Main.state == 0){					
 					for (int i = 0; i <= 4; i++) {
 						
@@ -188,7 +182,7 @@ public class AwtManager {
 				if (c != null){
 					
 					
-					g.scale(w/c.getWidth(), h/c.getHeight());
+					g.scale((double)w/c.getWidth(), (double)h/c.getHeight());
 					g.translate(-c.getX()+c.getWidth()/2, -c.getY()+c.getHeight()/2);
 					
 				}

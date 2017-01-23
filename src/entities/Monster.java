@@ -26,7 +26,7 @@ public class Monster extends Character implements Updatable{
 			setSpeedX(-Math.signum(posX - x) * speedMax);
 			setSpeedY(-Math.signum(posY - y) * speedMax);
 		}
-		else if (counter !=0 && Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2)) > 10){
+		else if (counter !=0 && Math.sqrt(Math.pow(Math.abs(posX - x),2) + Math.pow(Math.abs(posY - y),2)) < 30){
 			setSpeedX(Math.signum(posX - x) * speedMax);
 			setSpeedY(Math.signum(posY - y) * speedMax);
 		}
